@@ -1,7 +1,5 @@
 package com.community.fo.mybatis.vo;
 
-import java.util.Date;
-
 public class SampleVo {
 	
 	private String ST_NUM;
