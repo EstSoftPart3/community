@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!--라이브러리 참조 : Thymeleaf & Thymeleaf Layout -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--공통 JS / CSS 영역을 관리하는 환경 영역-->
+<th:block th:replace="~{common/fragmants/config :: configFragment}">
+	<title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">sample-page
+		full width</title>
+</th:block>
+
+<body>
+	<!--Header 영역을 참조합니다.-->
+	<th:block th:replace="~{common/fragmants/header :: headerFragment}" />
+
+	<!--Content 내용 영역을 참조합니다-->
+	<div layout:fragment="Content"></div>
+
+	<!--Footer 영역을 참조합니다.-->
+	<th:block th:replace="~{common/fragmants/footer :: footerFragment}" />
+</body>
+</html>

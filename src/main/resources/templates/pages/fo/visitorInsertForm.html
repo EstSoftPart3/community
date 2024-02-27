@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/visitorInsert}"
+	layout:fragment="Content">
+<head>
+
+<title>테스트 페이지</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	        
+	    </script>
+</head>
+<style>
+.layout {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+</style>
+<body>
+	<div>
+		<form method="post" th:action="@{/visitorInsert}">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>회원번호</th>
+						<th>이름</th>
+						<th>방문목적</th>
+						<th>작가이름</th>
+
+					</tr>
+				</thead>
+
+				<tbody>
+
+					<tr>
+						<td><input type="number" name="visitorSq" id="visitorSq"
+							th:value="0"></td>
+
+						<td><input type="text" name="visitorNm" id="visitorNm">
+						</td>
+						<td><input type="text" name="visitorResn" id="visitorResn">
+						</td>
+						<td><input type="text" name="wriNm" id="wriNm"></td>
+					</tr>
+
+				</tbody>
+
+			</table>
+			<button type="submit">등록</button>
+		</form>
+	</div>
+
+
+</body>
+</html>

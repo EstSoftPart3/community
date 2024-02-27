@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/visitorUpdate}"
+	layout:fragment="Content">
+<head>
+<title>테스트 페이지</title>
+
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	    </script>
+</head>
+
+<body>
+	<div>
+		<form method="post" th:action="@{/update}">
+			<table>
+				<thead>
+					<tr>
+						<th>회원번호</th>
+						<th>이름</th>
+						<th>방문목적</th>
+						<th>작가이름</th>
+
+					</tr>
+				</thead>
+
+				<tbody>
+
+					<tr>
+						<td><input disabled="disabled" type="number" name="visitorSq"
+							id="visitorSq" th:value="${visitor.visitorSq}"></td>
+						<td><a
+							th:href="@{/visitorUpdate/{visitorSq}(visitorSq=${visitor.visitorSq})}"
+							th:text="${visitor.visitorNm}"> </a> 바꿀 이름 :<input type="text"
+							name="visitorNm" id="visitorNm"></td>
+						<td>바꿀 목적:<input type="text" th:text="${visitor.visitorResn}"
+							name="visitorResn" id="visitorResn">
+						</td>
+						<td>바꿀 작가 :<input type="text" name="wriNm" id="wriNm"
+							th:text="${visitor.wriNm}">
+						</td>
+
+					</tr>
+				</tbody>
+
+			</table>
+			<button type="submit">수정</button>
+		</form>
+	</div>
+
+
+</body>
+</html>
