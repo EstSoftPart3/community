@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/hihihi}" layout:fragment="Content">
+<head>
+
+<title>테스트 페이지</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	        
+	    </script>
+</head>
+<style>
+.layout {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+</style>
+<body>
+	<div class="main">
+		<div>
+			<button type="button" class="btn btn-primary">
+				<a th:href="@{/visitorInsert}" style="color: white;">등록</a>
+			</button>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>회원번호</th>
+						<th>이름</th>
+						<th>방문목적</th>
+						<th>작가이름</th>
+						<th>삭제버튼</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="list : ${visitor}">
+						<td th:text="${list.visitorSq}"></td>
+						<td><a
+							th:href="@{visitorDetail/{visitorSq}(visitorSq=${list.visitorSq})}"
+							th:text="${list.visitorNm}"> </a></td>
+						<td th:text="${list.visitorResn}"></td>
+						<td th:text="${list.wriNm}"></td>
+						<td><button type="button" class="btn btn-danger">
+								<a th:href="@{delete/{visitorSq}(visitorSq=${list.visitorSq})}">삭제</a>
+							</button></td>
+					</tr>
+				</tbody>
+			</table>
+			<div></div>
+		</div>
+		<div></div>
+</body>
+</html>

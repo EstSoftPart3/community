@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/visitorDetail}"
+	layout:fragment="Content">
+<head>
+<title>테스트 페이지</title>
+
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	    </script>
+</head>
+
+<body>
+
+	<div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>회원번호</th>
+					<th>이름</th>
+					<th>방문목적</th>
+					<th>작가이름</th>
+					<th>삭제버튼</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${visitor.visitorSq}"><input type="number"
+						name="visitorSq" id="visitorSq"></td>
+					<td><a
+						th:href="@{/visitorUpdate/{visitorSq}(visitorSq=${visitor.visitorSq})}"
+						th:text="${visitor.visitorNm}"> </a></td>
+					<td th:text="${visitor.visitorResn}"><input type="text"
+						name="visitorResn" id="visitorResn"></td>
+					<td th:text="${visitor.wriNm}"><input type="text" name="wriNm"
+						id="wriNm"></td>
+					<td><button type="button" class="btn btn-danger">
+							<a
+								th:href="@{delete/{visitorSq}(visitorSq=${visitor.visitorSq})}">삭제</a>
+						</button></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+	</div>
+
+</body>
+</html>
