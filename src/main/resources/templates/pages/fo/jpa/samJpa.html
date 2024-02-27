@@ -61,7 +61,7 @@
 						<td th:text="${list.visitorResn}"></td>
 						<td th:text="${list.wriNm}"></td>
 						<td><button type="button" class="btn btn-danger">
-								<a th:href="@{delete/{visitorSq}(visitorSq=${list.visitorSq})}">삭제</a>
+								<a th:href="@{deleteJpa/{visitorSq}(visitorSq=${list.visitorSq})}">삭제</a>
 							</button></td>
 					</tr>
 				</tbody>

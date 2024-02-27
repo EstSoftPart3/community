@@ -24,7 +24,7 @@ public class SampleJpaController {
 
 		model.addAttribute("visitor", sampleJpaService.SampleEntitylist());
 		// html파일 만들어야함 //레이아웃을 부르는게 아니라 페이지를 부르는것 pages = views (jsp)
-		return "pages/fo/samJpa";
+		return "pages/fo/jpa/samJpa";
 	}
 
 	@GetMapping("/visitorDetail/{visitorSq}")
@@ -32,14 +32,14 @@ public class SampleJpaController {
 
 		model.addAttribute("visitor", sampleJpaService.Detail(visitorSq));
 
-		return "pages/fo/detail";
+		return "pages/fo/jpa/detailJsp";
 
 	}
 
 	@GetMapping("/visitorInsert")
 	public String insertGet() {
 
-		return "pages/fo/visitorInsertForm";
+		return "pages/fo/jpa/visitorInsertForm";
 	}
 
 	@PostMapping("/visitorInsert")
@@ -53,18 +53,18 @@ public class SampleJpaController {
 	public String updateGet(@PathVariable int visitorSq, Model model) {
 
 		model.addAttribute("visitor", sampleJpaService.Detail(visitorSq));
-		return "pages/fo/visitorUpdateForm";
+		return "pages/fo/jpa/visitorUpdateForm";
 
 	}
 
-	@PostMapping("/update")
+	@PostMapping("/visitorUpdate")
 	public String updatePost(SampleJpaEntity sampleJpaEntity) {
 
 		sampleJpaService.Update(sampleJpaEntity);
 		return "redirect:/hihihi";
 	}
 
-	@GetMapping("/delete/{visitorSq}")
+	@GetMapping("/deleteJpa/{visitorSq}")
 	public String delete(@PathVariable int visitorSq) {
 
 		sampleJpaService.delete(visitorSq);
