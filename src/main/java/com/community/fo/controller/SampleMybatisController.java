@@ -31,17 +31,11 @@ public class SampleMybatisController {
 	@Autowired
 	private SampleService sampleService;
 
-	// 테스트 페이지
-	@GetMapping("/test")
-	public String test() {
-		return "pages/fo/addEmpPage";
-	}
-
 	@GetMapping("/showAllEmp")
 	public String getEmployeesList(Model model) {
 
 		model.addAttribute("employees", sampleService.empListAll());
-		return "pages/fo/SampleFoPage";
+		return "pages/fo/mybatis/main";
 	}
 
 	
@@ -49,19 +43,12 @@ public class SampleMybatisController {
     public String searchEmpListByName(Model model,@PathVariable String name){
   
     model.addAttribute("employees",sampleService.empSearchByName(name)); 
-    return "pages/fo/SampleFoPage"; }
+    return "pages/fo/mybatis/main"; 
+    }
 	 
-	
-	/*
-	 * @GetMapping("/showEmp/{name}") public List<SampleVo>
-	 * searchEmpListByName(@PathVariable String name) {
-	 * 
-	 * return sampleService.empSearchByName(name); }
-	 */
-
 	@GetMapping("/addPage")
 	public String addPage(Integer id) {
-		return "pages/fo/addEmpPage";
+		return "pages/fo/mybatis/addEmpPage";
 	}
 
 	@PostMapping("/addFrom")
@@ -85,13 +72,13 @@ public class SampleMybatisController {
     public String viewDetail(Model model, Integer id){
 		
         model.addAttribute("empList",sampleService.viewDetail(id));
-        return "pages/fo/detail";
+        return "pages/fo/mybatis/empDetail";
     }
 	
 
 	
    @PostMapping("/update")
-    public String update(SampleVo sampleVo,Model model){
+    public String update(SampleVo sampleVo, Model model){
 	 
 	   model.addAttribute("empList", sampleService.empUpdate(sampleVo));
 	  return "redirect:/showAllEmp"; 
