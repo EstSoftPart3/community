@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/page-full-width-layout}"
+      layout:fragment="Content"
+>
+	<head>
+	    <title>테스트 페이지 </title>
+	    
+	    <!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+	
+	    <!-- inline JS 영역-->
+	    <script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	        
+	 
+
+	        
+	    </script>
+	</head>
+
+	<body>
+		<div>
+			<h1 style="text-align:center; font-weight: bold;">상세페이지</h1>
+			 <tr th:each="empList : ${empList}">
+			
+		      <form method="post" th:action="@{/update}">   
+			   
+			    <div class="form-group row">
+			        <label for="st_num" class="col-sm-4 text-sm-right text-bold">사번</label>
+			        <div class="col-sm-8">
+			            <input th:value="${empList.ST_NUM}"  readonly="readonly" id="sT_NUM" name="ST_NUM"  class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+						   
+			    <div class="form-group row">
+			        <label for="st_nm" class="col-sm-4 text-sm-right">이름</label>
+			        <div class="col-sm-8">
+			            <input th:value="${empList.ST_NM}" type="text" id="st_nm" name="ST_NM" class="form-control">
+			            
+			        </div>
+			    </div>
+			    <hr>
+			    			     
+			    <div class="form-group row">
+			        <label for="st_po" class="col-sm-4 text-sm-right">직급</label>
+			        <div class="col-sm-8">
+			            <input th:value="${empList.ST_PO}" type="text" id="st_po" name="ST_PO" class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+			    
+			      <div class="form-group row">
+			        <label for="st_dp" class="col-sm-4 text-sm-right">부서</label>
+			        <div class="col-sm-8">
+			            <input th:value="${empList.ST_DP}"  type="text" id="st_dp" name="ST_DP" class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+			    			     
+			    <div class="form-group row">
+			        <label for="st_tel" class="col-sm-4 text-sm-right">휴대전화</label>
+			        <div class="col-sm-8">
+			            <input th:value="${empList.ST_TEL}" type="text" id="st_tel" name="ST_TEL" class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+			    			      
+			    <div class="form-group row">
+			        <label for="st_bir" class="col-sm-4 text-sm-right">생년월일</label>
+			        <div class="col-sm-8">
+			            <input th:value="${empList.ST_BIR}"  type="text" id="st_bir" name="ST_BIR" class="form-control">
+			        </div>
+			    </div>
+			    <hr>	
+	
+			    <div class="form-group row">
+			        <label for="st_st" class="col-sm-4 text-sm-right">입사일자</label>
+			        <div class="col-sm-8">
+			            <input th:value="${empList.St_ST}" type="text" id="st_st" name="St_ST" class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+			
+			 
+			 
+			 <button type="submit" style="float: right; margin-bottom: 30px;" class="btn btn-warning">글 수정</button>
+			 <a th:href="@{/delete(st_num=${empList.ST_NUM})}" class="btn btn-danger" style="float: right; margin-bottom: 30px;" >글 삭제</a>
+			
+			</form>
+				
+			
+			
+		</div>
+	</body>
+</html>

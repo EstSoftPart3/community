@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/page-full-width-layout}"
+      layout:fragment="Content"
+>
+	<head>
+	    <title>테스트 페이지 </title>
+	    
+	    <!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+	
+	    <!-- inline JS 영역-->
+	    <script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	        
+	 
+
+	        
+	    </script>
+	</head>
+
+	<body>
+		<div>
+			<h1 style="text-align:center; font-weight: bold;">직원 추가하기</h1>
+			
+			<form action="/addFrom" method="post" class="mt-5">
+			   
+			    <div class="form-group row">
+			        <label for="st_num" class="col-sm-4 text-sm-right text-bold">사번</label>
+			        <div class="col-sm-8">
+			            <input type="text" id="sT_NUM" name="ST_NUM" class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+						   
+			    <div class="form-group row">
+			        <label for="st_nm" class="col-sm-4 text-sm-right">이름</label>
+			        <div class="col-sm-8">
+			            <input type="text" id="st_nm" name="ST_NM" class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+			    			     
+			    <div class="form-group row">
+			        <label for="st_po" class="col-sm-4 text-sm-right">직급</label>
+			        <div class="col-sm-8">
+			            <input type="text" id="st_po" name="ST_PO" class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+			    
+			      <div class="form-group row">
+			        <label for="st_dp" class="col-sm-4 text-sm-right">부서</label>
+			        <div class="col-sm-8">
+			            <input type="text" id="st_dp" name="ST_DP" class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+			    			     
+			    <div class="form-group row">
+			        <label for="st_tel" class="col-sm-4 text-sm-right">휴대전화</label>
+			        <div class="col-sm-8">
+			            <input type="text" id="st_tel" name="ST_TEL" class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+			    			      
+			    <div class="form-group row">
+			        <label for="st_bir" class="col-sm-4 text-sm-right">생년월일</label>
+			        <div class="col-sm-8">
+			            <input type="text" id="st_bir" name="ST_BIR" class="form-control">
+			        </div>
+			    </div>
+			    <hr>	
+	
+			    <div class="form-group row">
+			        <label for="st_st" class="col-sm-4 text-sm-right">입사일자</label>
+			        <div class="col-sm-8">
+			            <input type="text" id="st_st" name="St_ST" class="form-control">
+			        </div>
+			    </div>
+			    <hr>
+			 <button type="submit" class="btn btn-primary" id="addEmpBtn" style="float: right; margin-bottom: 30px;">직원 등록하기</button>
+			</form>
+			
+		</div>
+	</body>
+</html>
