@@ -2,7 +2,7 @@
 <!-- Default Layout Import-->
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{common/layout/visitorDetail}"
+    layout:decorate="~{common/layout/page-full-width-layout}"
     layout:fragment="Content">
 <head>
 <title>테스트 페이지</title>
@@ -34,7 +34,7 @@
                     <th>이름</th>
                     <th>방문목적</th>
                     <th>작가이름</th>
-                    <th>삭제버튼</th>
+                 
                 </tr>
             </thead>
             <tbody>
@@ -48,14 +48,9 @@
                         name="visitorResn" id="visitorResn"></td>
                     <td th:text="${visitor.wriNm}"><input type="text" name="wriNm"
                         id="wriNm"></td>
-                    <td><button type="button" class="btn btn-danger">
-                            <a
-                                th:href="@{deleteJpa/{visitorSq}(visitorSq=${visitor.visitorSq})}">삭제</a>
-                        </button></td>
                 </tr>
             </tbody>
         </table>
-
 
     </div>
 

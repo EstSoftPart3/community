@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.community.fo.jpa.entity.SampleJpaEntity;
+import com.community.fo.jpa.entity.SampleEntity;
 import com.community.fo.service.SampleJpaService;
 
 import lombok.RequiredArgsConstructor;
@@ -19,12 +19,12 @@ public class SampleJpaController {
 
 	private final SampleJpaService sampleJpaService;
 
-	@GetMapping("/hihihi")
+	@GetMapping("/showAllJpa")
 	public String SampleEntitylist(Model model) {
 
 		model.addAttribute("visitor", sampleJpaService.SampleEntitylist());
 		// html파일 만들어야함 //레이아웃을 부르는게 아니라 페이지를 부르는것 pages = views (jsp)
-		return "pages/fo/jpa/samJpa";
+		return "pages/fo/jpa/sampleJpa";
 	}
 
 	@GetMapping("/visitorDetail/{visitorSq}")
@@ -32,7 +32,7 @@ public class SampleJpaController {
 
 		model.addAttribute("visitor", sampleJpaService.Detail(visitorSq));
 
-		return "pages/fo/jpa/detailJsp";
+		return "pages/fo/jpa/detailJpa";
 
 	}
 
@@ -43,10 +43,10 @@ public class SampleJpaController {
 	}
 
 	@PostMapping("/visitorInsert")
-	public String insertPost(SampleJpaEntity sampleJpaEntity) {
+	public String insertPost(SampleEntity sampleJpaEntity) {
 
 		sampleJpaService.SampleEntityInsert(sampleJpaEntity);
-		return "redirect:hihihi";
+		return "redirect:showAllJpa";
 	}
 
 	@GetMapping("/visitorUpdate/{visitorSq}")
@@ -58,10 +58,12 @@ public class SampleJpaController {
 	}
 
 	@PostMapping("/visitorUpdate")
-	public String updatePost(SampleJpaEntity sampleJpaEntity) {
+	public String updatePost(SampleEntity sampleJpaEntity) {
 
+
+		
 		sampleJpaService.Update(sampleJpaEntity);
-		return "redirect:/hihihi";
+		return "redirect:showAllJpa";
 	}
 
 	@GetMapping("/deleteJpa/{visitorSq}")
@@ -69,7 +71,7 @@ public class SampleJpaController {
 
 		sampleJpaService.delete(visitorSq);
 
-		return "redirect:/hihihi";
+		return "redirect:/showAllJpa";
 	}
 
 }

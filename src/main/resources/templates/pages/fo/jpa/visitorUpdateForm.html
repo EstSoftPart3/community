@@ -2,7 +2,7 @@
 <!-- Default Layout Import-->
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{common/layout/visitorUpdate}"
+	layout:decorate="~{common/layout/page-full-width-layout}"
 	layout:fragment="Content">
 <head>
 <title>테스트 페이지</title>
@@ -40,10 +40,8 @@
 				<tbody>
 
 					<tr>
-						<td><input disabled="disabled" type="number" name="visitorSq"
-							id="visitorSq" th:value="${visitor.visitorSq}"></td>
-						<td><a
-							th:href="@{/visitorUpdate/{visitorSq}(visitorSq=${visitor.visitorSq})}"
+						<td><input type="text" name="visitorSq" id="visitorSq" th:value="${visitor.visitorSq}"></td>
+						<td><a th:href="@{/visitorUpdate/{visitorSq}(visitorSq=${visitor.visitorSq})}"
 							th:text="${visitor.visitorNm}"> </a> 바꿀 이름 :<input type="text"
 							name="visitorNm" id="visitorNm"></td>
 						<td>바꿀 목적:<input type="text" th:text="${visitor.visitorResn}"

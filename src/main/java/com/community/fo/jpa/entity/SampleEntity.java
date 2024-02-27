@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tb_est_visitor")
 @Entity
-public class SampleJpaEntity {
+public class SampleEntity {
 //@NoArgsConstructor(access = AccessLevel.PROTECTED) 무분별한 객체 생성 방지 
 //@Table(name = "tb_est_visitor") 테이블 네임 매핑 
 // pk 선언 변수선언시 구분자 _ 삭제 colum 명시 
