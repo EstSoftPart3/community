@@ -1,11 +1,9 @@
 package com.community.fo.controller;
- 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 
 import java.util.List;
 
@@ -34,18 +32,21 @@ public class SampleMybatisController {
 	@GetMapping("/showAllEmp")
 	public String getEmployeesList(Model model) {
 
-		model.addAttribute("employees", sampleService.empListAll());
+		List<SampleVo> empList = sampleService.empListAll();
+		System.out.println(empList);
+		
+		model.addAttribute("employees", empList);
+	
 		return "pages/fo/mybatis/main";
 	}
 
-	
-    @GetMapping("/showEmp/{name}") 
-    public String searchEmpListByName(Model model,@PathVariable String name){
-  
-    model.addAttribute("employees",sampleService.empSearchByName(name)); 
-    return "pages/fo/mybatis/main"; 
-    }
-	 
+	@GetMapping("/showEmp/{name}")
+	public String searchEmpListByName(Model model, @PathVariable String name) {
+
+		model.addAttribute("employees", sampleService.empSearchByName(name));
+		return "pages/fo/mybatis/main";
+	}
+
 	@GetMapping("/addPage")
 	public String addPage(Integer id) {
 		return "pages/fo/mybatis/addEmpPage";
@@ -54,35 +55,29 @@ public class SampleMybatisController {
 	@PostMapping("/addFrom")
 	public String addNewEmp(SampleVo sampleVo) {
 		sampleService.empInsert(sampleVo);
-		return "redirect:/showAllEmp"; 
+		return "redirect:/showAllEmp";
 	}
-	
 
-	
-	  // 글삭제
-	  @GetMapping("/delete") 
-	    public String empDelete(String st_num) {
-	        sampleService.empDelete(st_num); 
-	        return "redirect:/showAllEmp"; 
-	     }
-	 
-	
-	// 글 상세 
-	@GetMapping("/view") 
-    public String viewDetail(Model model, Integer id){
-		
-        model.addAttribute("empList",sampleService.viewDetail(id));
-        return "pages/fo/mybatis/empDetail";
-    }
-	
+	// 글삭제
+	@GetMapping("/delete")
+	public String empDelete(String st_num) {
+		sampleService.empDelete(st_num);
+		return "redirect:/showAllEmp";
+	}
 
-	
-   @PostMapping("/update")
-    public String update(SampleVo sampleVo, Model model){
-	 
-	   model.addAttribute("empList", sampleService.empUpdate(sampleVo));
-	  return "redirect:/showAllEmp"; 
-    }
+	// 글 상세
+	@GetMapping("/view")
+	public String viewDetail(Model model, Integer id) {
+
+		model.addAttribute("empList", sampleService.viewDetail(id));
+		return "pages/fo/mybatis/empDetail";
+	}
+
+	@PostMapping("/update")
+	public String update(SampleVo sampleVo, Model model) {
+
+		model.addAttribute("empList", sampleService.empUpdate(sampleVo));
+		return "redirect:/showAllEmp";
+	}
 
 }
- 

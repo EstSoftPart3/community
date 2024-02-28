@@ -51,18 +51,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr th:each="employese : ${employees}">
+                    <tr th:each="employees : ${employees}">
                     
-                      <th th:text="${employese.ST_NUM}"></th>
-                      <td th:text="${employese.ST_NM}"></td>
-                      <td th:text="${employese.ST_PO}"></td>
-                      <td th:text="${employese.ST_DP}"></td>
+                      <th th:text="${employees.ST_NUM}"></th>
+                      <td th:text="${employees.ST_NM}"></td>
+                      <td th:text="${employees.ST_PO}"></td>
+                      <td th:text="${employees.ST_DP}"></td>
                      
-                      <td th:text="${employese.ST_TEL}"></td>
-                      <td th:text="${employese.ST_BIR}"></td>
-                      <td th:text="${employese.St_ST}"></td>
+                      <td th:text="${employees.ST_TEL}"></td>
+                      <td th:text="${employees.ST_BIR}"></td>
+                      <td th:text="${employees.St_ST}"></td>
                       
-                      <th><a th:href="@{/view(id=${employese.ST_NUM})}" >상세보기</a></th>
+                      <th><a th:href="@{/view(id=${employees.ST_NUM})}" >상세보기</a></th>
                       
                     </tr>
                   </tbody>
