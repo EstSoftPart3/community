@@ -33,8 +33,8 @@ public class SampleMybatisController {
 	public String getEmployeesList(Model model) {
 
 		List<SampleVo> empList = sampleService.empListAll();
-		System.out.println(empList);
 		
+		System.out.println(empList);
 		model.addAttribute("employees", empList);
 	
 		return "pages/fo/mybatis/main";
