@@ -72,6 +72,8 @@ public class MemberController {
 	
 	 @GetMapping("/searchById/{id}")
 	    public MemberResponseDto findById(@PathVariable int id){
+		 
+		 return memberJpaService.findMemberById(id);
 	    }
 	
 
