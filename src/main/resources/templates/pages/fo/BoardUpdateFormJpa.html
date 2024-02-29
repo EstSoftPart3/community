@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/page-full-width-layout}" layout:fragment="Content">
+<head>
+
+<title>테스트 페이지</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	        
+	    </script>
+</head>
+<style>
+.layout {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+</style>
+<body>
+
+	<div class="main">
+		<div>
+		<form method="post" th:action="@{/boardUpdate}">
+		<input type="hidden" name="delCd" id="delCd" th:value="${board.delCd}">
+		<input type="hidden" name="recmmndCnt" id="recmmndCnt" th:value="${board.recmmndCnt}">
+		<input type="hidden" name="selectionYn" id="selectionYn" th:value="${board.selectionYn}">
+		<input type="hidden" name="selecttionDivCd" id="selecttionDivCd" th:value="${board.selecttionDivCd}">
+		<input type="hidden" name="noticeDivCd" id="noticeDivCd" th:value="${board.noticeDivCd}">
+		<input type="hidden" name="useYn" id="useYn" th:value="${board.useYn}">
+		<input type="hidden" name="delYn" id="delYn" th:value="${board.delYn}">
+		<input type="hidden" name="registMbrSq" id="registMbrSq" th:value="${board.registMbrSq}">
+		<input type="hidden" name="registDatetime" id="registDatetime" th:value="${board.registDatetime}">
+		<input type="hidden" name="modifyMbrSq" id="modifyMbrSq" th:value="${board.modifyMbrSq}">
+		<input type="hidden" name="modifyDateTime" id="modifyDateTime" th:value="${board.modifyDateTime}">
+			
+			<button type="button" class="btn btn-primary">
+				등록
+			</button>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>게시판번호</th>
+						<th>회원아이디</th>
+						<th>제목</th>
+						<th>내용</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="number" name="boardSq" id="boardSq" th:value="${board.boardSq}"> </td>
+						<td><input type="text" name="mbrId" id="mbrId" th:value="${board.mbrId}"></td>
+						<td> <input type="text" name="title" id="title"  th:value="${board.title}" > </td>
+						<td><input type="text" name="contents" id="contents" th:value="${board.contents}"> </td>
+						<td><input type="number" name="viewCnt" id="viewCnt" th:value="${board.viewCnt}"> </td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<button type="submit">수정</button>
+			</form>
+			<div>
+		</div>
+		
+		
+
+</body>
+</html>
