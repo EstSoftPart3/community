@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/page-full-width-layout}" layout:fragment="Content">
+<head>
+
+<title>테스트 페이지</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	        
+	        </script>
+	    
+	    
+</head>
+<style>
+.layout {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+</style>
+<body>
+
+	<div class="main">
+		<div>
+		<form method="post" th:action="@{/boardInsert}">
+		<input type="hidden" name="delCd" id="delCd" value="N" >
+		<input type="hidden" name="recmmndCnt" id="recmmndCnt" value="0" >
+		<input type="hidden" name="selectionYn" id="selectionYn" value="N" >
+		<input type="hidden" name="selecttionDivCd" id="selecttionDivCd" value="WFR" >
+		<input type="hidden" name="noticeDivCd" id="noticeDivCd" value="N" >
+		<input type="hidden" name="useYn" id="useYn" value="Y" >
+		<input type="hidden" name="delYn" id="delYn" value="N" >
+		<input type="hidden" name="registMbrSq" id="registMbrSq" value="1" >
+		<input type="date" name="registDatetime" id="registDatetime" >
+		<input type="hidden" name="modifyMbrSq" id="modifyMbrSq" value="1" >
+		<input type="date"  name="modifyDateTime" id="modifyDateTime" >
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>게시판번호</th>
+						<th>회원아이디</th>
+						<th>제목</th>
+						<th>내용</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="number" name="boardSq" id="boardSq" value="0"> </td>
+						<td><input type="text" name="mbrId" id="mbrId" value="User1" ></td>
+						<td> <input type="text" name="title" id="title" > </td>
+						<td><input type="text" name="contents" id="contents" > </td>
+						<td><input type="number" name="viewCnt" id="viewCnt" value="0" > </td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<button type="submit">등록</button>
+			</form>
+			<div>
+		</div>
+		
+		
+
+</body>
+</html>

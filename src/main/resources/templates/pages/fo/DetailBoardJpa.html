@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/page-full-width-layout}" layout:fragment="Content">
+<head>
+
+<title>테스트 페이지</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	        
+	    </script>
+</head>
+<style>
+.layout {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+</style>
+<body>
+
+	<div class="main">
+		<div>
+			<button type="button" class="btn btn-primary">
+				등록
+			</button>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>게시판번호</th>
+						<th>회원아이디</th>
+						<th>제목</th>
+						<th>내용</th>
+						<th>조회수</th>
+						<th>삭제버튼 </th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td th:text="${board.boardSq}"></td>
+						<td th:text="${board.mbrId}"></td>
+						<td th:text="${board.title}"></td>
+						<td th:text="${board.contents}"></td>
+						<td th:text="${board.viewCnt}"></td>
+						<td>
+						<form method="get" th:action="@{/deleteBoard/{boardSq}(boardSq=${board.boardSq})}">
+						<button type="submit" class="btn btn-danger">
+								삭제
+							</button> </form></td>
+				</tr>
+				
+				</tbody>
+			</table>
+		<form method="get" th:action="@{/boardUpdate/{boardSq}(boardSq=${board.boardSq})}">
+		<button type="submit" class="btn btn-primary">
+		 수정
+		</button>
+		</form>
+		
+			<div>
+		</div>
+		
+		
+
+</body>
+</html>
