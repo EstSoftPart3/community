@@ -1,7 +1,6 @@
 package com.community.fo.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,11 +40,12 @@ public class MemberJpaService {
 
     @Transactional
     public int updateMember(int id, MemberUpdateDto memberUpdateDto){
-    	 MemberEntity memberEntity = memberRepository.findMbrById(id).orElse(null);
+    	 MemberEntity memberEntity = memberRepository.findById(id).orElse(null);
 		 memberEntity.update(memberUpdateDto.getId(),memberUpdateDto.getPw(),memberUpdateDto.getEmail(),memberUpdateDto.getNicknm(),memberUpdateDto.getName(),memberUpdateDto.getPhone(),memberUpdateDto.getAddress());
         return id;
     }
 
+  
     public MemberResponseDto findMemberById(int mbrSq){
         MemberEntity memberEntity= memberRepository.findById(mbrSq).orElseThrow(() -> new IllegalArgumentException("해당 회원 존재하지 않음"));
         return new MemberResponseDto(memberEntity);
