@@ -1,27 +1,33 @@
 package com.community.fo.jpa.repository;
 
 
+import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.community.fo.jpa.entity.MemberEntity;
 
 
+
 @Repository
 public interface MemberRepository  extends JpaRepository<MemberEntity, Integer>  {
 
-
 	
-	//모든 멤버 가져오기 
+	/*
+	 * 사용자 정보를 조회하는 repository 
+	 * string param으로 가져오는 메소드가 jpa에 없어서 @query어노테이션을 사용해서 쿼리문 작성
+	 * 쿼리 작성시 from table name 이 아니라 entity name 으로 해줘야 함 
+	 */
 	
 	
-	//멤버 회원가입 
 	
-	
-	//멤버 수정하기 
-	
-	//멤버 삭제하기 
+	 @Query("select id,pw,name from MemberEntity m where m.id in ?1")
+	 User findById(String id);
 
 }

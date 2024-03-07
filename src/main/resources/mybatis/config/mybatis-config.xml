@@ -13,6 +13,7 @@
     
       <mappers>
         <mapper resource="./mybatis/mapper/fo/SampleFoMapper.xml"/>
+        <mapper resource="./mybatis/mapper/fo/MemberMapper.xml"/>
     </mappers>
 
 </configuration>

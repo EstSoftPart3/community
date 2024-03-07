@@ -8,6 +8,23 @@
 	<th:block th:replace="~{common/fragmants/config :: configFragment}">
         <title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">sample-page full width</title>
     </th:block>
+    
+       <style>
+		
+		#header {
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  
+		  height: 60px;
+		  padding: 1rem;
+		  display: flex;
+		  justify-content: space-between;
+		  align-items: center;
+		}
+		
+	</style>
 
     <body>
         <!--Header 영역을 참조합니다.-->

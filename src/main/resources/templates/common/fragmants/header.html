@@ -4,6 +4,24 @@
       xmlns:th="http://www.thymeleaf.org"
       >
       
+        <style>
+		
+		#header {
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  
+		  height: 75px;
+		  padding: 1rem;
+		  
+		  display: flex;
+		  justify-content: space-between;
+		  align-items: center;
+		}
+		
+	</style>
+      
 	<th:block th:fragment="headerFragment">
 		
     <header id="header" class="header-effect-shrink" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': false, 'stickyEnableOnMobile': false, 'stickyStartAt': 70, 'stickyChangeLogo': false, 'stickyHeaderContainerHeight': 70}">

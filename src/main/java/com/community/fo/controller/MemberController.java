@@ -1,80 +1,179 @@
 package com.community.fo.controller;
 
+
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.community.fo.jpa.dto.MemberResponseDto;
-import com.community.fo.jpa.dto.MemberUpdateDto;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.community.fo.jpa.entity.MemberEntity;
-import com.community.fo.service.MemberJpaService;
+import com.community.fo.mybatis.vo.MemberVo;
+import com.community.fo.service.MemberService;
+import com.community.fo.service.UserDetailService;
 
-import jakarta.transaction.Transactional;
 
-@RestController
+@Controller
 public class MemberController {
 	
 	// 서비스 인스턴스 주입을 위해 사용하는 어노테이션 
 	@Autowired
-	private MemberJpaService memberJpaService;
+	private MemberService memberService;
 	
 	
+	private UserDetailService userService;
+	
+	// 화원가입 페이지
+	@GetMapping("/register")
+	public String goRegister(Model model) {
+
+		return "pages/fo/registerMember";
+	}
+
+	/*
+	 * // 로그인 페이지
+	 * 
+	 * @GetMapping("/loginPage") public String goLogin(Model model) {
+	 * 
+	 * return "pages/fo/login";
+	 */
+	
+	
+	// 메인 페이지 
+	@GetMapping("/main")
+	public String goMain(Model model) {
+
+		return "pages/fo/main";
+	}
+	
+	// 약관 동의 페이지
+	@GetMapping("/agree")
+	public String agreePage(Model model) {
+
+		return "pages/fo/agreement";
+	}
+	
+	// 비밀번호 찾기 페이지
+	@GetMapping("/findPw")
+	public String findPwPage(Model model) {
+
+		return "pages/fo/findPwPage";
+	}
 	
 	// 회원가져오기 
 	@GetMapping("/showAllMember")
 	public List<MemberEntity> showAllmember() {
 		
-		List<MemberEntity> memberList = memberJpaService.showAllList();
+		List<MemberEntity> memberList = memberService.showAllList();
 		return memberList;		
 	}
-
-	//회원 등록하기
 	
-	@PostMapping("/registerMember")
-	public List<MemberEntity> registerMember(MemberEntity memberEntity) {
+	// 아이디 중복 채크 
+	@PostMapping("/idCheck")
+	@ResponseBody
+	public int idCheck(@RequestParam("id") String id){
 		
-		memberJpaService.registerMember(memberEntity);
-		List<MemberEntity> memberList = memberJpaService.showAllList();
-		return memberList;
+		//System.out.println("param" + id);
+		
+		int result = memberService.getOneMemberById(id);
+		
+		
+		System.out.println("id값:" +result);
+		
+		return result;
+	
+	}
+	
+	// 닉네임 중복 체크
+	@GetMapping("/nicknmCheck")
+	@ResponseBody
+	public int nickNmCheck(@RequestParam("nicknm") String nicknm){
+		
+		int result = memberService.getOneMemberByNicknm(nicknm);
+		System.out.println(result);
+		
+		return result;
+		
+	}
+
+
+	
+	//회원 등록하기
+	@PostMapping("/registerMember")
+	public String registerMember(MemberEntity memberEntity) {
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		memberEntity.setPwEncryp(passwordEncoder.encode(memberEntity.getPw()));
+
+		memberService.registerMember(memberEntity);
+		
+		return "redirect:/login";
 		
 	}
 	
-
+	
 	//회원 삭제하기 
 	@GetMapping("/delMember/{mbrSq}")
-	public List<MemberEntity> delete(@PathVariable int mbrSq) {
+	public String delete(@PathVariable int mbrSq) {
 
-		memberJpaService.delMember(mbrSq);
-		List<MemberEntity> memberList = memberJpaService.showAllList();
-
-		return memberList;
+		int result = memberService.delMember(mbrSq);
+		
+		if(result == 1 ) {
+			return "삭제 성공"; 
+		}
+		else {
+			return "삭제 실패";
+		}
+	
 	}
 	
 	
 	//회원 수정하기 
-	
-	@PostMapping("/updateMember/{id}")
-	public List<MemberEntity> updateMember(@PathVariable int id,
-                                            @RequestBody MemberUpdateDto memberUpdateDto) {
+	@PostMapping("/updateMember/{mbrSq}")
+	public String updateMember(@PathVariable int mbrSq, MemberEntity memberEntity) {
 		
-         memberJpaService.updateMember(id, memberUpdateDto);
-         List<MemberEntity> memberList = memberJpaService.showAllList();
-
- 		return memberList;
-		
+       int  result =  memberService.updateMember(mbrSq, memberEntity);
+        
+        if(result == 1) {
+        	return "등록 회원 없음";
+        }
+        else {
+        	return "회원 수정 완료";
+        	
+        }
+        
 	}
 	
-	 @GetMapping("/searchById/{id}")
-	    public MemberResponseDto findById(@PathVariable int id){
-		 
-		 return memberJpaService.findMemberById(id);
-	    }
+	  //로그인 기능
 	
+	@GetMapping("/login")
+    public String login(Model model) {
+       
+		return "pages/fo/login";
+    }
+
+	
+	
+	
+	// mybatis member List 뿌리기
+	// 회원가져오기 
+	@GetMapping("/showMember")
+	public List<MemberVo> showMember() {
+		
+		List<MemberVo> memberList = memberService.empList();
+		return memberList;		
+	}
+
+
+
+
 
 }

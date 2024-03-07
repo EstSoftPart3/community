@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/page-full-width-layout}"
+      layout:fragment="Content"
+>
+	<head>
+	    <title>회원가입</title>
+	    
+	    <!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+	
+	    <!-- inline JS 영역-->
+	    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	    <script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+   
+	    </script>
+	</head>
+
+	<body style="margin-top: 100px;">
+		<div class="container" style="border:none;justify-content: center;">
+
+							<div class="row justify-content-md-center">
+								<div class="col-md-6">
+									<div class="featured-box featured-box-primary text-start mt-0">
+										<div class="box-content">
+											<h4 class="color-primary font-weight-semibold text-4 text-uppercase mb-3">회원 로그인</h4>
+											<form action="/login" id="frmSignIn" method="post" class="needs-validation">
+												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+												<div class="row">
+													<div class="form-group col">
+														<label class="form-label">ID</label>
+														<input type="text" name="username" value="" class="form-control form-control-lg" required>
+													</div>
+												</div>
+												<div class="row">
+													<div class="form-group col">
+														<a class="float-end" href="/findPw">비밀번호 찾기</a>
+														<label class="form-label">Password</label>
+														<input type="password" name="password" value="" class="form-control form-control-lg" required>
+													</div>
+												</div>
+												<div class="row">
+													<div class="form-group col-lg-6">
+														<div class="custom-control custom-checkbox">
+															<input type="checkbox" name="rememberme" class="custom-control-input" id="rememberme">
+															<label class="custom-control-label text-2" for="rememberme">로그인 정보 저장하기</label>
+														</div>
+													</div>
+													<div class="form-group col-lg-6">
+														<input type="submit" value="로그인" class="btn btn-primary btn-modern float-end" data-loading-text="Loading...">
+													</div>
+													
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+	
+	</body>
+</html>
