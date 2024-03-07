@@ -13,47 +13,47 @@ import lombok.Data;
 @AllArgsConstructor
 public class BoardVo {
 
-	private int BOARD_SQ;
+	private int boardSq;
 	
-	private String MBR_ID;
+	private String mbrId;
 	
-	private String TITLE;
+	private String title;
 	
-	private String DEL_CD;
+	private String delCd;
 
-	private String CONTENTS;
+	private String contents;
 	
-	private int RECMMND_CNT;
+	private int recmmndCnt;
 	
-	private int VIEW_CNT;
+	private int viewCnt;
 	
-	private String KEYWORD1;
+	private String keyword1;
 	
-	private String KEYWORD2;
+	private String keyword2;
 
-	private String KEYWORD3;
+	private String keyword3;
 
-	private String KEYWORD4;
+	private String keyword4;
 	
-	private String KEYWORD5;
+	private String keyword5;
 	
-	private String SELECTION_YN;
+	private String selectionYn;
 
-	private String SELECTION_DIV_CD;
+	private String selecttionDivCd;
 	
-	private String NOTICE_DIV_CD;
+	private String noticeDivCd;
 	
-	private String USE_YN;
+	private String useYn;
 
-	private String DEL_YN;
+	private String delYn;
 	
-	private int REGIST_MBR_SQ;
+	private int registMbrSq;
 	
-	private Date REGIST_DATETIME;
+	private Date registDatetime;
 	
-	private int MODIFY_MBR_SQ;
+	private int modifyMbrSq;
 	
-	private Date MODIFY_DATETIME;
+	private Date modifyDateTime;
 	
 	
 }

@@ -39,7 +39,7 @@
 
 	<div class="main">
 		<div>
-		<form method="post" th:action="@{/boardUpdate}">
+		<form method="post" th:action="@{/board/{boardSq}(boardSq=${board.boardSq})}">
 		<input type="hidden" name="delCd" id="delCd" th:value="${board.delCd}">
 		<input type="hidden" name="recmmndCnt" id="recmmndCnt" th:value="${board.recmmndCnt}">
 		<input type="hidden" name="selectionYn" id="selectionYn" th:value="${board.selectionYn}">

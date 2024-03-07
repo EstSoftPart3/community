@@ -40,7 +40,7 @@
 	<div class="main">
 		<div>
 			<button type="button" class="btn btn-primary">
-				<a th:href="@{/boardInsert}" style="color: white;">등록</a>
+				<a th:href="@{/board/Insert}" style="color: white;">등록</a>
 			</button>
 
 			<table class="table">
@@ -56,8 +56,8 @@
 				</thead>
 				<tbody>
 					<tr th:each="board : ${board}">
-						<td><a th:href="@{boardDetail/{boardSq}(boardSq=${board.boardSq})}" th:text="${board.boardSq}"></a> </td>
-						<td th:text=${board.delCd}></td>
+						<td><a th:href="@{board/{boardSq}(boardSq=${board.boardSq})}" th:text="${board.boardSq}"></a> </td>
+						<td> <a th:href="@{/board/SQL/{boardSq}(boardSq=${board.boardSq})}" th:text="${board.delCd}"></a></td>
 						<td th:text="${board.mbrId}"></td>
 						<td th:text="${board.title}"></td>
 						<td th:text="${board.contents}"></td>

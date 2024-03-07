@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.community.fo.mybatis.mapper.BoardMapper">
 
-    <resultMap id="boardResult" type="com.community.fo.mybatis.vo.BoardVo">
+    <resultMap id="CommentResult" type="com.community.fo.mybatis.vo.CommentVo">
         <id property="boardSq" column="BOARD_SQ"/>
 	 	<id property="mbrId" column="MBR_ID"/>
 	 	<id property="title" column="TITLE"/>
@@ -28,12 +28,5 @@
 	 	<id property="modifyDateTime" column="MODIFY_DATETIME"/>	
     </resultMap>
 
-
-    <select id="ListBoards" resultMap="boardResult">
-        SELECT * FROM TBL_BOARD_M
-    </select>
-	<select id="selectBoard" parameterType="int" resultMap="boardResult">
-	     SELECT * FROM TBL_BOARD_M WHERE board_sq = #{boardSq}
-    </select>
 
 </mapper>

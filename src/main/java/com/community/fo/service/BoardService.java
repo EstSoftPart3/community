@@ -7,12 +7,11 @@ import org.springframework.stereotype.Service;
 import com.community.fo.mybatis.vo.BoardVo;
 
 @Service
-
 public interface BoardService {
 
-
-	public List<BoardVo> BoardListAllSQL();
-
-	
-	
+    List<BoardVo> ListBoards();
+    BoardVo selectBoard(int boardSq);
+    int insertBoard(BoardVo board);
+    int updateBoard(BoardVo board);
+    int deleteBoard(int boardSq);
 }

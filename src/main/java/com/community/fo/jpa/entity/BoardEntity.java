@@ -1,11 +1,16 @@
 package com.community.fo.jpa.entity;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.hibernate.annotations.DynamicInsert;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -20,7 +25,8 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "TBL_BOARD_M")
 @Entity
-public class BoardJpaEntity {
+@DynamicInsert
+public class BoardEntity {
 
 	@Id
 	@GeneratedValue(generator = "sequence")
@@ -90,5 +96,8 @@ public class BoardJpaEntity {
 	@Column(name = "MODIFY_DATETIME")
 	private Date modifyDateTime;
 	
+	
+	@OneToMany
+	private List<CommentEntity> commentList;
 	
 }

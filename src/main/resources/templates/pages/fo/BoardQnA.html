@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/page-full-width-layout}" layout:fragment="Content">
+<head>
+
+<title>테스트 페이지</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	        
+	    </script>
+</head>
+<style>
+.layout {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+</style>
+<body>
+
+	<div class="main">
+		<div>
+			<button type="button" class="btn btn-primary">
+				<a th:href="@{/board/InsertQnA}" style="color: white;">질문 등록</a>
+			</button>
+				<select style="float: right;"  name="">
+				<option value="" selected="selected">전 체</option>
+				<option value="">조회순</option>
+				<option value="">최신순</option>
+				<option value="">추천순</option>
+				
+				</select>
+				<select style="float: right;" name="">
+				<option value="WFR" selected="selected">전 체 </option>
+				<option value="WFR">답변 대기 </option>
+				<option value="PFC">채택 완료  </option>
+				<option value="CFR">답변 완료 </option>
+				</select>
+			
+				<hr>
+				<br>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>답변여부</th>
+						<th>게시판번호</th>
+						<th>게시판유형</th>
+						<th>회원아이디</th>
+						<th>제목</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr style="height: 100px;" th:each="board : ${board}">
+						<td>
+						<p style="border:solid; border-style: 10px;" th:if="${board.selecttionDivCd == 'WFR'}">답변 대기</p>						
+						<p style="border:solid; border-style: 10px;" >경험치</p> </td>
+						<td th:text="${board.boardSq}">  </td>
+						<td> <a th:href="@{/board/QnA/{boardSq}(boardSq=${board.boardSq})}" th:text="${board.delCd}"></a></td>
+						<td th:text="${board.mbrId}"></td>
+						<td th:text="${board.title}"></td>
+						<td ><p><span th:text="${board.viewCnt}"></span> 뷰</p>	
+						<td ><p>답변수:<span th:text="${board.recmmndCnt}"></span></p>
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+			<div class="text-center" >
+			<nav   aria-label="Page navigation example">
+			  <ul class="pagination">
+			    <li class="page-item">
+			      <a class="page-link" href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="page-item"><a class="page-link" href="#">1</a></li>
+			    <li class="page-item"><a class="page-link" href="#">2</a></li>
+			    <li class="page-item"><a class="page-link" href="#">3</a></li>
+			    <li class="page-item">
+			      <a class="page-link" href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+			</div>
+					</div>
+			</div>
+			
+</body>
+</html>

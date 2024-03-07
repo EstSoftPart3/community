@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/page-full-width-layout}" layout:fragment="Content">
+<head>
+
+<title>테스트 페이지</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	       
+	        
+	    </script>
+<script>
+	const deleteById = (commentSq) => {
+		console.log("버튼클릭");
+		alert("엥"+commentSq);
+		console.log(commentSq);
+		
+		var delUrl = "/deleteComment/"+commentSq;
+		
+		$.ajax({
+			type: 'post',
+			url: delUrl,
+			data : {"commentSq" : commentSq},
+		success : function(){
+			alert('뭔데');
+			
+		},error(){
+			alert('실패')
+			
+		}
+		})
+	}
+
+
+
+
+
+</script>
+</head>
+<style>
+.layout {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+</style>
+<body>
+
+		<div class="container">
+		<h1>Q&A 게시판</h1>
+		<div style="border-top: solid; border-top-style:1px;  margin-top:30px; border-bottom: solid; border-bottom-style: 1px;">
+		<label>제목</label>
+		<p><span th:text="${board.title}"></span><span th:text="${board.useYn}"></span>
+		<span ></span>
+		<span></span><span></span></p>
+		
+		</div>
+		<div  class="container text-center" style="margin-top: 30px;">
+		
+		<p th:text="${board.contents}"></p>
+		<div>
+			<button type="submit" class="btn btn-primary">
+								추천
+							</button>
+		</div>
+		</div>
+		<div style="margin-top: 100px;">
+			<form method="post" th:action="@{/board/QnA/{boardSq}/delete(boardSq=${board.boardSq})}">
+				<button type="submit" style="float: right;" class="btn btn-danger">
+						삭제
+				</button>
+			</form>
+		</div>
+		<form method="get" th:action="@{/board/Update/{boardSq}(boardSq=${board.boardSq})}">
+		<button type="submit" class="btn btn-primary">
+		 수정
+		</button>
+		</form>
+		
+			<div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>가보자</th>
+						<th>댓글번호</th>
+						<th>닉네임</th>
+						<th>채택여부</th>
+						<th></th>
+						<th></th>
+						<th>게시판번호</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+		
+					<tr th:each="co : ${comment}">
+						<td>ㄱㄱ</td>
+						<td><input id="idxl${co.commentSq}" th:value="${co.commentSq}" th:text="${co.commentSq}">  </td>
+						<td th:text="${co.contents}"></td>
+						<th:block th:with="co.selectionYn='Y'">
+							<td	th:if="${co.selectionYn} == 'Y' ? '채택완료': '채택대기'"> 채택완료</td>
+						</th:block>
+						<td th:text="${co.useYn}"></td>
+						<td th:text="${co.delYn}"></td>
+						<td th:text="${co.boardSq}"></td>
+						<td>
+							<input class="btn btn-danger" type="button" th:onclick="deleteById([[${co.commentSq}]])" value="삭제">
+						</td>											
+					</tr>
+					
+				</tbody>
+				</table>
+				
+				<form method="post" th:action="@{/board/insertCommn}">
+				<input type="hidden" name="commentSq" id="commentSq" value="0">
+				<textarea cols="130" rows="3" name="contents"></textarea>
+				<input type="hidden" name="boardSq" id="boardSq" th:value="${board.boardSq}">
+					<input type="hidden" name="modifyMbrSq" th:value="${board.boardSq}">
+				<input type="hidden" name="mbrSq" id="contents" th:value="${board.boardSq}">
+							
+
+				<button type="submit" class="btn btn-primary">
+				댓글등록 
+				</button>
+				</form>
+		</div>
+		</div>
+		
+		
+
+</body>
+</html>

@@ -37,46 +37,38 @@
 </style>
 <body>
 
-	<div class="main">
-		<div>
-			<button type="button" class="btn btn-primary">
-				등록
-			</button>
+		<div class="container">
 
-			<table class="table">
-				<thead>
-					<tr>
-						<th>게시판번호</th>
-						<th>회원아이디</th>
-						<th>제목</th>
-						<th>내용</th>
-						<th>조회수</th>
-						<th>삭제버튼 </th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td th:text="${board.boardSq}"></td>
-						<td th:text="${board.mbrId}"></td>
-						<td th:text="${board.title}"></td>
-						<td th:text="${board.contents}"></td>
-						<td th:text="${board.viewCnt}"></td>
-						<td>
-						<form method="get" th:action="@{/deleteBoard/{boardSq}(boardSq=${board.boardSq})}">
-						<button type="submit" class="btn btn-danger">
-								삭제
-							</button> </form></td>
-				</tr>
-				
-				</tbody>
-			</table>
-		<form method="get" th:action="@{/boardUpdate/{boardSq}(boardSq=${board.boardSq})}">
+		<div style="border-top: solid; border-top-style:1px;  border-bottom: solid; border-bottom-style: 1px;">
+		<p><span th:text="${board.title}"></span><span th:text="${board.boardSq}"></span>
+		<span ></span>
+		<span></span><span></span></p>
+		
+		</div>
+		<div class="container">
+		
+		<p  th:text="${board.contents}"></p>
+		<div>
+			<button type="submit" class="btn btn-primary">
+								추천
+							</button>
+		</div>
+		</div>
+		<div style="margin-top: 100px;">
+			<form method="post" th:action="@{/board/{boardSq}/delete(boardSq=${board.boardSq})}">
+				<button type="submit" style="float: right;" class="btn btn-danger">
+						삭제
+				</button>
+			</form>
+		</div>
+		<form method="get" th:action="@{/board/Update/{boardSq}(boardSq=${board.boardSq})}">
 		<button type="submit" class="btn btn-primary">
 		 수정
 		</button>
 		</form>
 		
 			<div>
+		</div>
 		</div>
 		
 		

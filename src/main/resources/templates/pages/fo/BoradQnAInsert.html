@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/page-full-width-layout}" layout:fragment="Content">
+<head>
+
+<title>테스트 페이지</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+<!--	            alert("페이지가 시작됩니다.")-->
+	        });
+	        
+	        </script>
+	    
+	    
+</head>
+<style>
+.layout {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+</style>
+<body>
+
+	<div class="main">
+		<div>
+		<form method="post" th:action="@{/board/InsertQnA}">
+	
+				<input type="hidden" name="boardSq" id="boardSq" value="0">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td> <label>관련 탭 </label><br>
+						<select style="width: 600px;">
+						<option  selected="selected">스킬</option>
+						<option  >업무 </option>
+						<option >기타</option>
+						</select>
+						 </td>
+					</tr>
+					<tr>
+						<td style="height: 100px;">
+						<label>키워드</label>
+						<input type="text" name="keyword1" placeholder="키워드를 입력해주세요." ><button type="button" class="btn btn-primary" style="margin-left: 10px;">등록/수정</button>
+						<input type="hidden" name="mbrId" id="mbrId" value="User1" ></td>
+					</tr>
+					<tr>
+					
+						<td> <label>제목</label><br>
+						<input style="width: 600px;" type="text" name="title" id="title" > </td>
+					</tr>
+					<tr>
+					
+						<td><label>본문</label>
+						<br>
+						<textarea cols="80" rows="10"  name="contents" id="contents" ></textarea> </td>
+					</tr>
+					<tr>
+					<td> <input type="hidden" name="modifyMbrSq" id="modifyMbrSq" value="0" > </td>
+							<td> <input type="hidden" name="registMbrSq" id="registMbrSq" value="0" > </td>
+						<td> <input type="hidden" name="recmmndCnt" id="recmmndCnt" value="0" > </td>
+						<td> <input type="hidden" name="viewCnt" id="viewCnt" value="0" > </td>
+					</tr>
+					
+				</tbody>
+			</table>
+			
+			<button type="submit" class="btn btn-primary">등록/수정</button>
+			</form>
+			<div>
+		</div>
+		
+		
+
+</body>
+</html>
