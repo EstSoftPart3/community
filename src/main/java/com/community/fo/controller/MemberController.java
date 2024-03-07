@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.community.fo.jpa.entity.MemberEntity;
 import com.community.fo.mybatis.vo.MemberVo;
 import com.community.fo.service.MemberService;
@@ -93,7 +95,7 @@ public class MemberController {
 	}
 	
 	// 닉네임 중복 체크
-	@GetMapping("/nicknmCheck")
+	@PostMapping("/nicknmCheck")
 	@ResponseBody
 	public int nickNmCheck(@RequestParam("nicknm") String nicknm){
 		
