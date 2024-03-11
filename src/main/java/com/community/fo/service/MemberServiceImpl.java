@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.stereotype.Service;
 
-
+import com.community.common.security.Role;
 import com.community.fo.jpa.entity.MemberEntity;
 import com.community.fo.jpa.repository.MemberRepository;
 import com.community.fo.mybatis.mapper.MemberMapper;
@@ -43,6 +43,7 @@ public class MemberServiceImpl implements MemberService {
 		
         System.out.println(memberEntity.getPw());
         memberEntity.setPwEncryp(passwordEncoder.encode(memberEntity.getPw()));
+        memberEntity.setRole(Role.USER);
         
         
 		memberRepository.save(memberEntity);

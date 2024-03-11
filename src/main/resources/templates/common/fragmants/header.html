@@ -2,8 +2,9 @@
 <html lang="ko" 
       xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       >
-      
+    // 스프링 시큐리티를 위한 의존성 추가 - sec  
         <style>
 		
 		#header {
@@ -22,7 +23,7 @@
 		
 	</style>
       
-	<th:block th:fragment="headerFragment">
+	<th:block  th:fragment="headerFragment">
 		
     <header id="header" class="header-effect-shrink" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': false, 'stickyEnableOnMobile': false, 'stickyStartAt': 70, 'stickyChangeLogo': false, 'stickyHeaderContainerHeight': 70}">
 		<div class="header-body border-top-0 box-shadow-none">
@@ -1010,11 +1011,24 @@
 										<div class="actions">
 											<a class="btn btn-dark" href="#">View Cart</a>
 											<a class="btn btn-primary" href="#">Checkout</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+										
+									    </div>
+								    </div>
+							   </div>
+						   </div>
+						   <div>
+					 <div>
+                        <li class="nav-item" sec:authorize="isAnonymous()">
+                                       <a class="nav-link" href="/login">로그인</a>
+                          </li>
+                          <li class="nav-item" sec:authorize="isAnonymous()">
+                                      <a class="dropdown-item" href="/logout">로그아웃</a>
+                          </li>
+                          <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <!--  <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">내 정보</a>-->
+                             
+                          </li>
+                     </div>
 					</div>
 				</div>
 			</div>

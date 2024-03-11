@@ -4,13 +4,14 @@ package com.community.fo.jpa.repository;
 import java.util.List;
 import java.util.Optional;
 
-
+import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.community.common.security.PrincipalDetails;
 import com.community.fo.jpa.entity.MemberEntity;
 
 
@@ -27,7 +28,7 @@ public interface MemberRepository  extends JpaRepository<MemberEntity, Integer> 
 	
 	
 	
-	 @Query("select id,pw,name from MemberEntity m where m.id in ?1")
-	 User findById(String id);
+	@Query("SELECT m FROM MemberEntity m WHERE m.id = :userId")
+	MemberEntity findByUserId(@Param("userId") String userId);
 
 }

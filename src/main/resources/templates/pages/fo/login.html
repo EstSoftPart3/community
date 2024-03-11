@@ -29,7 +29,7 @@
 	</head>
 
 	<body style="margin-top: 100px;">
-		<div class="container" style="border:none;justify-content: center;">
+		<div class="container" style="border:none;justify-content: center; padding: 10%;">
 
 							<div class="row justify-content-md-center">
 								<div class="col-md-6">
@@ -49,6 +49,7 @@
 														<a class="float-end" href="/findPw">비밀번호 찾기</a>
 														<label class="form-label">Password</label>
 														<input type="password" name="password" value="" class="form-control form-control-lg" required>
+														<div class="message" th:if="${hasMessage == true}" th:text="${message}">
 													</div>
 												</div>
 												<div class="row">

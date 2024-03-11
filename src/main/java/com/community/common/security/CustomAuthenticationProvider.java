@@ -2,6 +2,7 @@ package com.community.common.security;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -10,15 +11,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.stereotype.Service;
-
-import com.community.fo.jpa.dto.PrincipalDetails;
-
-import com.community.fo.service.UserDetailService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,44 +31,37 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	 */
 	
 	
-    UserDetailService userDetailsService;
-    BCryptPasswordEncoder passwordEncoder;
-    
-    public CustomAuthenticationProvider(UserDetailService userDetailsService, BCryptPasswordEncoder passwordEncoder) {
-        this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
-    }
-   
-	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		
-		 
-		
-		    String id = authentication.getName();
-	        String password =  (String)authentication.getCredentials();
+	    private final UserDetailService userDetailService;
+	    private final BCryptPasswordEncoder passwordEncoder;
+
+	    @Override
+	    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+	        String id = authentication.getName();
+	        String password = (String) authentication.getCredentials();
 	        
-	        PrincipalDetails user = (PrincipalDetails ) userDetailsService.loadUserByUsername(id);
+	        System.out.println("회원입력" + password);
 
-	       
-	        if(!passwordEncoder.matches(password, user.getPassword())) {
-				throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
-			}
-	        List<GrantedAuthority> authorities = new ArrayList<>();
-			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-			//롤을 지정 
-			
-			return new UsernamePasswordAuthenticationToken(id,password,authorities);
-			//계정이 인증됐다면 UsernamePasswordAuthenticationToken 객체에 화면에서 입력한 정보와 DB에서 가져온 권한을 담아서 리턴한다.
-			
-	}
+	        try {
+	            UserDetails userDetails = userDetailService.loadUserByUsername(id);
 
-	@Override
-	public boolean supports(Class<?> authentication) {
-		 return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
-	}
-	
-	
+	            // 사용자가 입력한 비밀번호와 DB에 저장된 비밀번호를 비교하여 일치하는지 확인
+	            boolean passwordMatch = passwordEncoder.matches(password, userDetails.getPassword());
 
+	            if (!passwordMatch) {
+	                throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
+	            }
+
+	            List<GrantedAuthority> authorities = new ArrayList<>(userDetails.getAuthorities());
+
+	            return new UsernamePasswordAuthenticationToken(userDetails, password, authorities);
+	        } catch (UsernameNotFoundException e) {
+	            throw new BadCredentialsException("사용자를 찾을 수 없습니다.");
+	        }
+	    }
+	     @Override
+	     public boolean supports(Class<?> authentication) {
+	         return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
+	     }
     
 
 

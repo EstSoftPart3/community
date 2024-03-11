@@ -25,57 +25,208 @@
 	        $(document).ready(() => {
 <!--	            alert("페이지가 시작됩니다.")-->
 
-	
-				// 닉네임 중복 체크 
-				$("#overlappedNm").click(function(){
-	
-					var nicknm = $("#nicknm").val();
-	
-					$.ajax({
-					type:"POST",
-					url:"/nicknmCheck",
-					data:{"nicknm":nicknm},
-					success: function (result) {
-					if(result == 0) {
-						
-						$("#nmMessage").text("사용 가능한 닉네임 입니다.");
-	
-						}else {
-							$("#nmMessage").text("이미 사용중인 닉네임 입니다.");
-						
-						 }
-						}
-					})
-				});
-	
+					 var idCheckBtn = false;
+					 var nmCheckBtn = false;
+					 
+					   $("div.error").hide();
+					   $("div.message").hide();
+					 
+					 
+							 	      
+				      //아이디를 건너뛸 경우 에러메시지
+				      $("input#name").blur( (e) => {
+				         if( $(e.target).val().trim() == ""){
+				         
+				         
+				            $("form#joinForm :input").prop("disabled",true);
+				            $(e.target).prop("disabled",false);
+				   
+				            $(e.target).parent().find("div.error").show();
+				            $(e.target).focus();
 				
-				//아이디 중복 체크 		
-				$("#overlappedID").click(function(){
+				         }
+			         else{
+			            // 공백만이 아닌 글자를 입력했을 경우
+			            $("form#joinForm :input").prop("disabled",false);
+			            $(e.target).parent().find("div.error").hide();       
+			         }
+			       }); // end of userid.BLUR 
+			       
+			       
+			         // 아이디 유효성 검사 
+			         $("input#id").blur( (e) => {
+				         if( $(e.target).val().trim() == ""){
+				         
+				         
+				            $("form#joinForm :input").prop("disabled",true);
+				            $(e.target).prop("disabled",false);
+				   
+				            $(e.target).parent().find("div.error").show();
+				            $(e.target).focus();
+				
+				         }
+			         else{
+			            // 공백만이 아닌 글자를 입력했을 경우
+			            $("form#joinForm :input").prop("disabled",false);
+			            $(e.target).parent().find("div.error").hide(); 
+			            $(e.target).parent().find("div.message").show();   
+			            
+			             
+			         }
+			       }); // end of userid.BLUR 
+			       
+			        //비밀번호 유효성 검사 
+			       $("input#pw").blur( (e) => {
+			            
+			          const regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;
+			          
+			          const bool = regExp.test($(e.target).val());
+			          
+				          if(!bool){
+				             //암호가 정규표현식에 위배된 경우
+				             $("form#joinForm :input :input").prop("disabled",true);
+				             $(e.target).prop("disabled",false);
+				            
+				             $(e.target).parent().find("div.error").show();
+				             $(e.target).focus();
+				          }
+				          else{
+				             //암호가 정규표현식에 맞는 경우
+				             $("form#joinForm :input :input").prop("disabled",false);
+				             $(e.target).parent().find("div.error").hide();
+				          }
+				       });
+		       
+				       // 비밀번호 체크
+				       $("input#pwCheck").blur( (e) => {
+				            
+				            if($("input#pw").val() != $(e.target).val() ){
+				               
+				              $(e.target).prop("disabled",false);
+				              $("input#pw").prop("disabled",false);
+				            
+				               $(e.target).parent().find("div.error").show();
+				               $("input#pw").focus();
+				            }
+				            else{
+				               $("form#joinForm :input :input").prop("disabled",false);
+				               $(e.target).parent().find("div.error").hide();
+				            }
+				             
+				          });// 비번이 입력한비번과 같은지 체크 
+	      
+	       
+				 
+						//아이디 중복 체크 		
+						$("#overlappedID").click(function(){
+							
+							$("div.message").hide();
+						    var id = $("#id").val();
 	
-					var id = $("#id").val();
+							$.ajax({
+								url:"/idCheck",
+								type:"POST",
+								data: {"id" : id},
+			
+								success: function (result) {
+									   if(result == 0) {
+						                  
+						                  $("#idMessage").text("사용 가능한 ID 입니다.");
+						                  return idCheckBtn = true;
+					                  
+					                  
+					                  }else {
+					                     $("#idMessage").text("이미 사용중인 ID 입니다.");
+					                     id = "";
+					                     return idCheckBtn = false;
+					                      
+					                  }
+					                  
+									}
+							})	
+							
+						});
+						
+					    // 닉네임 중복 체크 
+						$("#overlappedNm").click(function(){
+			
+							var nicknm = $("#nicknm").val();
+			
+							$.ajax({
+							type:"POST",
+							url:"/nicknmCheck",
+							data:{"nicknm":nicknm},
+							success: function (result) {
+							if(result == 0) {
+								
+								$("#nmMessage").text("사용 가능한 닉네임 입니다.");
+								   return nmCheckBtn = true;
+			
+								}else {
+									$("#nmMessage").text("이미 사용중인 닉네임 입니다.");
+								   return  nmCheckBtn = false;
+								 }
+								}
+							})
+						});
+			
 					
-					$.ajax({
-						url:"/idCheck",
-						type:"POST",
-						data: {"id" : id},
-	
-						success: function (result) {
-							   if(result == 0) {
-				                  
-				                  $("#idMessage").text("사용 가능한 ID 입니다.");
-			                  
-			                  
-			                  }else {
-			                     $("#idMessage").text("이미 사용중인 ID 입니다.");
-			                      
-			                  }
-			                  
-							}
-					})
-				});
+						 	
+               let anyEmptyRequiredField = false;
 
-	        });
+			    // Check for empty required fields on form submission
+			    document.getElementById("joinForm").onsubmit = function() {
+			        // Reset the flag
+			        anyEmptyRequiredField = false;
+			
+			        // Check each required field
+			        $("input.requiredInfo").each((index, elmt) => {
+			            if ($(elmt).val().trim() == "") {
+			                anyEmptyRequiredField = true;
+			                return false; // Exit the loop early since we found an empty required field
+			            }
+			        });
+			
+			        // If any required field is empty, prevent form submission
+			        if (anyEmptyRequiredField) {
+			            alert("필수입력사항은 모두 입력하셔야 합니다.");
+			            return false;
+			        }
+			
+			        // If all required fields are filled, allow form submission
+			        return true;
+			  
+
+				
+					 // 버튼 안눌렀을 때 submit 방지
+						
+						if(isCheckBtn == false){
+							alert("중복체크를 해주세요")
+							return false;
+						}
+						else{
+							return true;
+						}
+						
+						if(nmCheckBtn == false){
+							alert("중복체크를 해주세요")
+							return false;
+						}
+						else{
+							return true;
+						}
+						
+						
+					 
+				    }// end of onsubmit
+				 
+				 
+				 
+        }); // end of document.ready()
 	        
+	        
+				
+					 
 	        function openZipSearch() {
 			    new daum.Postcode({
 			    	oncomplete: function(data) {     
@@ -100,6 +251,8 @@
 			}
 			
 			
+			
+			
 		
 		
 
@@ -116,101 +269,106 @@
 				<div class="card-body ">
 					<div class="row justify-content-md-center">
 						<div class="col" >
-						  	<form class="contact-form" action="/registerMember" method="POST" >
+						  	<form class="contact-form" id="joinForm" action="/registerMember" onsubmit="return false"  method="POST" >
 								<div class="row">
 									<div class="form-group col-lg-6">
 										<label class="form-label mb-1 text-2 font-weight-bold">이름</label>
-										<input type="text"  name="name" id="name" value="" class="form-control text-3 h-auto py-2" >
+										<input type="text"  name="name" id="name" value="" class="form-control text-3 h-auto py-2 requiredInfo"  >								        
+									      <div class="error">필수입력값입니다</div>
 									</div>         
 									
 								</div>
 								<div class="row">
 									<div class="form-group col-lg-6">
 										<label class="form-label mb-1 text-2 font-weight-bold">닉네임</label>
-										<input type="text" name="nicknm" id="nicknm" class="form-control text-3 h-auto py-2" >  
+										<input type="text" name="nicknm" id="nicknm" class="form-control text-3 h-auto py-2 requiredInfo"  >  
+									    <div id="nmMessage"></div>
 									</div>
 									
 									<div class="form-group col-lg-3" style="margin-top: 35px;">
 									 <button type="button" id="overlappedNm"  class="btn btn-primary"> 중복 확인</button>
-									 <p id="nmMessage"></p>
+								
 									</div>
 								
 								</div>
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<label class="form-label mb-1 text-2 font-weight-bold">아이디</label>
+										<label class="form-label mb-1 text-2 font-weight-bold requiredInfo">아이디</label>
 										<input type="text" name="id" id="id" class="form-control text-3 h-auto py-2"  >	
+										<div class="error">6자리 이상 12자리 이하로 조합해주세요</div>
+										<div class="message">중복 검사를 해주세요</div>
+										<div id="idMessage"></div>
 									</div>
 									
 									<div class="form-group col-lg-3" style="margin-top: 35px;">
 									 <button type="button"  id="overlappedID" class="btn btn-primary"> 중복 확인</button>
-									 <p id="idMessage"></p>
-										<p id="idMessage1"></p>
 									</div>
 									
 								</div>
 								
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<label class="form-label mb-1 text-2 font-weight-bold">비밀번호</label>
+										<label class="form-label mb-1 text-2 font-weight-bold requiredInfo">비밀번호</label>
 										<input type="password" name="pw" id="pw" value="" class="form-control text-3 h-auto py-2" >
+									    <div class="error">대소문자 포함 8자리 이상으로 조합해주세요</div>
 									</div>
 									
 								</div>
 								<div class="row">
 									<div class="form-group col-lg-6">
-											<label class="form-label mb-1 text-2 font-weight-bold">비밀번호 재확인</label>
-											<input type="password"  name="pwEncryp" id="pwEncryp" value=""  class="form-control text-3 h-auto py-2">
-										</div>
-										</div>
+											<label class="form-label mb-1 text-2 font-weight-bold requiredInfo">비밀번호 재확인</label>
+											<input type="password"  name="pwCheck" id="pwCheck" value=""  class="form-control text-3 h-auto py-2">
+									        <div class="error">비밀번호가 일치하지않습니다</div>
+									</div>
+								</div>
 								
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<label class="form-label mb-1 text-2 font-weight-bold">이메일</label>
+										<label class="form-label mb-1 text-2 font-weight-bold requiredInfo">이메일</label>
 										<input type="email" name="email" id="email" value=""class="form-control text-3 h-auto py-2" >
 									</div>			
 								</div>
 								
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<label class="form-label mb-1 text-2 font-weight-bold">휴대전화</label>
+										<label class="form-label mb-1 text-2 font-weight-bold requiredInfo">휴대전화</label>
 										<input type="text" name="phone" id="phone" value=""class="form-control text-3 h-auto py-2" >
 									</div>			
 								</div>
 					 
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<label class="form-label mb-1 text-2 font-weight-bold">우편주소</label>
-										<input class="form-control text-3 h-auto py-2" type="text"  id="postCode" name="postCode" onclick="openZipSearch();" readonly="readonly">	
+										<label class="form-label mb-1 text-2 font-weight-bold requiredInfo">우편주소</label>
+										<input class="form-control text-3 h-auto py-2" type="text"  id="postCode" name="postCode" onclick="openZipSearch();" readonly="readonly" >	
 								    </div>
 								   
 								</div>
 								
 								<div class="row">
 								   <div class="form-group col-lg-6">
-										<label class="form-label mb-1 text-2 font-weight-bold">기본주소</label>
-										<input class="form-control text-3 h-auto py-2" type="text"  id="address" name="address" onclick="openZipSearch();" readonly="readonly">
+										<label class="form-label mb-1 text-2 font-weight-bold requiredInfo">기본주소</label>
+										<input class="form-control text-3 h-auto py-2" type="text"  id="address" name="address" onclick="openZipSearch();" readonly="readonly" >
 								    </div>
 								 </div>  
 								<div class="row">
 								  <div class="form-group col-lg-6">
-										<label class="form-label mb-1 text-2 font-weight-bold">상세주소</label>
-										<input class="form-control text-3 h-auto py-2" type="text"  id="addressDetail" name="addressDetail" >
+										<label class="form-label mb-1 text-2 font-weight-bold requiredInfo">상세주소</label>
+										<input class="form-control text-3 h-auto py-2" type="text"  id="addressDetail" name="addressDetail"  >
 								    </div>
 								 </div>   
 
 								<div class="row">
 							  		<div class="form-group col-lg-6">
 								    	<div class="form-check">
-								      		<input class="form-check-input" type="checkbox" value="" name="agree1" id="tabContent9Checkbox1"  >
-								      		<label class="form-check-label font-weight-bold" for="tabContent9Checkbox1">
+								      		<input class="form-check-input" type="checkbox" value="" name="agree1" id="tabContent9Checkbox1">
+								      		<label class="form-check-label font-weight-bold" for="tabContent9Checkbox1"></label>
 								        		이메일 수신 동의
 								      		</label>
 								      		
 								   		</div>
 								   		
 								   		<div class="form-check">
-								      		<input class="form-check-input" type="checkbox" value="" name="agree2" id="tabContent9Checkbox2">
+								      		<input class="form-check-input" type="checkbox" value="" name="agree2" id="tabContent9Checkbox2" >
 								      		<label class="form-check-label font-weight-bold" for="tabContent9Checkbox2">
 								        		약관 동의
 								      		</label>
@@ -220,7 +378,7 @@
 								  	</div>
 						  	
 								<div class="row">
-									<div class="form-group col-lg-6">
+									<div class="form-group">
 										<input type="submit" value="회원가입" class="btn btn-primary col-lg-9" data-loading-text="Loading...">
 									</div>
 								</div>

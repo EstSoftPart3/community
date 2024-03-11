@@ -1,24 +1,15 @@
 package com.community.fo.jpa.entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import com.community.fo.jpa.Role;
+import com.community.common.security.Role;
 
 import groovy.transform.builder.Builder;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -27,7 +18,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -64,6 +54,7 @@ public class MemberEntity {
 	@Column(name="NAME")
 	private String name;
 	
+	@ColumnDefault("1")
 	@Column(name="DIV_CD")
 	private String divCd;
 	
@@ -87,7 +78,7 @@ public class MemberEntity {
 	@Column(name="PROFILE_IMAGE_URL")
 	private String profileImageUrl;
 	
-	@ColumnDefault("N")
+	
 	@Column(name="SECESS_YN")
 	private String secessYn;
 	
@@ -95,6 +86,7 @@ public class MemberEntity {
 	@Column(name="SOCIAL_LINK_YN")
 	private String socialLinkYn;
 	
+	@ColumnDefault("N")
 	@Column(name="SOCIAL_JOIN_DIV_CD")
 	private String socialJoinDivCd;
 	
@@ -106,6 +98,7 @@ public class MemberEntity {
 	@Column(name="DEL_YN")
 	private String delYn;
 	
+	@ColumnDefault("1")
 	@Column(name="REGIST_MBR_SQ")
 	private String registMbrSq;
 	
@@ -116,6 +109,7 @@ public class MemberEntity {
 	@Column(name="MODIFY_MBR_SQ")
 	private String modifyMbrSq;
 	
+	@CreationTimestamp
 	@Column(name="MODIFY_DATETIME")
 	private String modifyDatetime;	 
 	
@@ -146,20 +140,12 @@ public class MemberEntity {
 	
 
 	@Builder
-	public  MemberEntity(String id, String name, String pw) {
+	public  MemberEntity(String id, String name, String pwEncryp) {
 		this.id = id;
 		this.name = name;
-		this.pw = pw;
+		this.pw = pwEncryp;
 		
 	}
-
-
-
-
-	
-
-	
-
 	
 	
 }

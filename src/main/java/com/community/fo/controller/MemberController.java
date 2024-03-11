@@ -5,8 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.community.common.security.PrincipalDetails;
+import com.community.common.security.UserDetailService;
 import com.community.fo.jpa.entity.MemberEntity;
 import com.community.fo.mybatis.vo.MemberVo;
 import com.community.fo.service.MemberService;
-import com.community.fo.service.UserDetailService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -154,12 +163,24 @@ public class MemberController {
         
 	}
 	
-	  //로그인 기능
-	
+	 //로그인 기능
 	@GetMapping("/login")
-    public String login(Model model) {
-       
+    public String login(@RequestParam(required = false) boolean hasMessage,
+			            @RequestParam(required = false) String message,
+			            HttpServletRequest request,
+			            Model model) {
+		
+		model.addAttribute("hasMessage", hasMessage);
+   
 		return "pages/fo/login";
+    }
+	
+	//로그아웃 기능
+	@GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        new SecurityContextLogoutHandler().logout(request, response,
+                SecurityContextHolder.getContext().getAuthentication());
+        return "redirect:/login";
     }
 
 	
