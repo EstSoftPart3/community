@@ -71,16 +71,16 @@ public class BoardController {
 	public String detailQnA(@PathVariable int boradSq,Model model) {
 		
 		BoardEntity boardDetail = bsi.BoardDetail(boradSq);
-		List<CommentEntity> commentList = csi.commentList(); 
+//		List<CommentEntity> commentList = csi.commentList(); 
 //		CommentEntity commentDetail = bsi.commentDetail(commentSq);
 		
 		 model.addAttribute("board", boardDetail);
 		//바람직하지않다 
 		// service 단에서 게시판의 형태(업무) 가 다르지않다면 한컨트롤러 service에서 분기 board 나눌지 합칠지 
 		 
-		 if(commentList != null && !commentList.isEmpty()) {
-		 model.addAttribute("comment", commentList);		
-		 }
+		
+//		 model.addAttribute("comment", commentList);		
+		
 		return "pages/fo/DetailQnA";
 		
 	}
@@ -103,15 +103,7 @@ public class BoardController {
 		return "redirect:/board";
 		
 	}
-	@PostMapping("/insertCommn")
-	public String insertComment(CommentEntity commentEntity) {
-		
-		
-		csi.CommentInsert(commentEntity);
-	
-		
-	   return "redirect:/board/QnA/1";
-	}
+
 	
 	@GetMapping("/Update/{boardSq}")
 	public String updateGetBoard(@PathVariable int boardSq , Model model) {
