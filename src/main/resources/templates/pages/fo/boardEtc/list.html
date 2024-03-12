@@ -26,9 +26,7 @@
 <!--	            alert("페이지가 시작됩니다.")-->
 	        });
 	        
-	        </script>
-	    
-	    
+	    </script>
 </head>
 <style>
 .layout {
@@ -40,24 +38,16 @@
 <body>
 
 	<div class="main">
-		<div>
-		<form method="post" th:action="@{/board/Insert}">
-		<input type="hidden" name="delCd" id="delCd" value="Q&A" >
-		<input type="hidden" name="recmmndCnt" id="recmmndCnt" value="0" >
-		<input type="hidden" name="selectionYn" id="selectionYn" value="N" >
-		<input type="hidden" name="selecttionDivCd" id="selecttionDivCd" value="WFR" >
-		<input type="hidden" name="noticeDivCd" id="noticeDivCd" value="N" >
-		<input type="hidden" name="useYn" id="useYn" value="Y" >
-		<input type="hidden" name="delYn" id="delYn" value="N" >
-		<input type="hidden" name="registMbrSq" id="registMbrSq" value="1" >
-		<input type="date" name="registDatetime" id="registDatetime" >
-		<input type="hidden" name="modifyMbrSq" id="modifyMbrSq" value="1" >
-		<input type="date"  name="modifyDateTime" id="modifyDateTime" >
+		<div style="margin-top: 150px;">
+			<button type="button" class="btn btn-primary">
+				<a th:href="@{/board/Insert}" style="color: white;">등록</a>
+			</button>
 
 			<table class="table">
 				<thead>
 					<tr>
 						<th>게시판번호</th>
+						<th>게시판유형</th>
 						<th>회원아이디</th>
 						<th>제목</th>
 						<th>내용</th>
@@ -65,18 +55,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><input type="number" name="boardSq" id="boardSq" value="0"> </td>
-						<td><input type="text" name="mbrId" id="mbrId" value="User1" ></td>
-						<td> <input type="text" name="title" id="title" > </td>
-						<td><input type="text" name="contents" id="contents" > </td>
-						<td><input type="number" name="viewCnt" id="viewCnt" value="0" > </td>
+					<tr th:each="board : ${board}">
+						<td><a th:href="@{board/{boardSq}(boardSq=${board.boardSq})}" th:text="${board.boardSq}"></a> </td>
+						<td th:text="${board.delCd}"></td>
+						<td th:text="${board.mbrId}"></td>
+						<td th:text="${board.title}"></td>
+						<td th:text="${board.contents}"></td>
+						<td th:text="${board.viewCnt}"></td>
 					</tr>
 				</tbody>
 			</table>
-			
-			<button type="submit">등록</button>
-			</form>
 			<div>
 		</div>
 		

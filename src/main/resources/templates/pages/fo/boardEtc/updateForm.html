@@ -38,7 +38,7 @@
 <body>
 
 	<div class="main">
-		<div>
+		<div style="margin-top: 150px;">
 		<form method="post" th:action="@{/board/{boardSq}(boardSq=${board.boardSq})}">
 		<input type="hidden" name="delCd" id="delCd" th:value="${board.delCd}">
 		<input type="hidden" name="recmmndCnt" id="recmmndCnt" th:value="${board.recmmndCnt}">

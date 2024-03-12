@@ -19,13 +19,6 @@ public class SampleJpaController {
 
 	private final SampleJpaService sampleJpaService;
 
-	@GetMapping("/jo")
-	
-	public String si() {
-		
-		
-		return "pages/fo/aaaaa";
-	}
 	
 	@GetMapping("/showAllJpa")
 	public String SampleEntitylist(Model model) {

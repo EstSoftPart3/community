@@ -45,7 +45,7 @@ public class BoardController {
 		List<BoardEntity> boards = bsi.BoardList();
 		model.addAttribute("board", boards);
 		
-		return "pages/fo/BoardFoList";
+		return "pages/fo/boardEtc/list";
 	}
 	@GetMapping("/QnA")
 		public String BoardQnA(Model model) {
@@ -53,7 +53,7 @@ public class BoardController {
 		List<BoardEntity> boards = bsi.BoardList();
 		model.addAttribute("board", boards);
 		
-		return "pages/fo/BoardQnA";
+		return "pages/fo/boardQnA/list";
 	}
 	
 	@GetMapping("/{boradSq}")
@@ -63,7 +63,7 @@ public class BoardController {
 		 
 		 model.addAttribute("board", boardDetail);
 				 
-		return "pages/fo/DetailBoardJpa";
+		return "pages/fo/boardEtc/detail";
 		
 	}
 	
@@ -81,26 +81,26 @@ public class BoardController {
 		
 //		 model.addAttribute("comment", commentList);		
 		
-		return "pages/fo/DetailQnA";
+		return "pages/fo/boardQnA/detail";
 		
 	}
 	
 	@GetMapping("/Insert")
 	public String insertGetBoard() {
 		
-		return "pages/fo/BoardInsertFormJpa";
+		return "pages/fo/boardEtc/insertForm";
 	}
 	@GetMapping("/InsertQnA")
 	public String insertGetQnA() {
 		
-		return "pages/fo/BoradQnAInsert";
+		return "pages/fo/boardQnA/insertForm";
 	}
 	
 	@PostMapping("/InsertQnA")
 	public String insertBoardPost(BoardEntity boardEntity) {
 		
 		bsi.BoardInsert(boardEntity);
-		return "redirect:/board";
+		return "redirect:/board/QnA";
 		
 	}
 
@@ -110,7 +110,7 @@ public class BoardController {
 		BoardEntity board = bsi.BoardDetail(boardSq);
 		
 		model.addAttribute("board", board);
-		return "pages/fo/BoardUpdateFormJpa";
+		return "pages/fo/boardEtc/updateForm";
 	}
 	
 	@PostMapping("/{boardSq}")
