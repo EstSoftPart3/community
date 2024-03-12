@@ -17,7 +17,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             throws Exception {
         // 여기에서 로그인 여부를 확인하고, 로그인되어 있지 않으면 로그인 페이지로 리다이렉트하도록 작성
         // 예를 들어, Spring Security를 사용하고 있다면, SecurityContextHolder 등을 활용하여 로그인 여부를 확인할 수 있습니다.
-        // 이 예시에서는 PrincipalDetails를 사용하고 있다고 가정하겠습니다.
+        
         PrincipalDetails principal = (PrincipalDetails) request.getUserPrincipal();
 
         if (principal == null) {

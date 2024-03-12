@@ -31,6 +31,8 @@ public class LoginFailHandler extends SimpleUrlAuthenticationFailureHandler {
 	        return encodeMessage;
 	    }
 	 
-	 //메소드 스펙을 봅시다. onAuthenticationFailure 메소드는 파라미터로 AuthenticationException을 받습니다. 이것이 제가 LoginCheckFailException을 AuthenticationException으로 상속받은 이유입니다. AuthenticationException만 로그인 실패 핸들러를 통해 예외 처리를 할 수 있기 때문입니다.
+	 // onAuthenticationFailure 메소드는 파라미터로 AuthenticationException을 받습니다. 
+	 // 이것이 LoginCheckFailException을 AuthenticationException으로 상속받은 이유입니다.
+	 // AuthenticationException만 로그인 실패 핸들러를 통해 예외 처리를 할 수 있기 때문입니다.
 
 }

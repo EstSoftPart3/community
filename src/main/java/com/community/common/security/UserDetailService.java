@@ -28,8 +28,7 @@ public class UserDetailService implements UserDetailsService {
 		
 		
 		  MemberEntity memberEntity = memberRepo.findByUserId(id); // 사용자 정보를 데이터베이스에서 가져옴
-		  System.out.println(memberEntity.getName());
-		  
+
 		    if (memberEntity != null)
 
 		    	

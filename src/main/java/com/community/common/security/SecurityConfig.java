@@ -28,10 +28,11 @@ public class SecurityConfig  {
 					)
 					.authorizeHttpRequests((authorizeRequests) ->
 							authorizeRequests
-							        .requestMatchers("/css/**", "/images/**", "/js/**").permitAll() // 인증하지 않은 필요 자원들 허용가능 
-									.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() //  정적 자원 접근 허용
-									.requestMatchers("/login", "/logout").permitAll()
-							        .anyRequest().permitAll()
+							.requestMatchers("/css/**", "/images/**", "/js/**").permitAll() // 인증하지 않은 필요 자원들 허용가능 
+					        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() //  정적 자원 접근 허용
+					        .requestMatchers("/login", "/logout", "/main").permitAll()
+					        .requestMatchers("/logout").permitAll() // 로그아웃 요청에 대해 모든 사용자 허용
+					        .anyRequest().permitAll()
 						            
 					)
 					
@@ -43,6 +44,7 @@ public class SecurityConfig  {
 									.failureHandler(new LoginFailHandler()) // 로그인 실패 시 실행되는 핸들러 
               
 					)
+				
 					.logout((logoutConfig) ->
 							logoutConfig.logoutSuccessUrl("/main") // 로그아웃 시 메인 페이지로 이동 
 							            .invalidateHttpSession(true) // 세션 무효화
@@ -53,7 +55,6 @@ public class SecurityConfig  {
 			}
 			
 		
-			
 			// 비밀번호 암호화 기능
 			// controller에 빈으로 등록된 BCryptPasswordEncoder를 자동 주입을 해줍니다.
 			 

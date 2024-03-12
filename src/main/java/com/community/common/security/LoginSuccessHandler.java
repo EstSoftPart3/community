@@ -3,6 +3,7 @@ package com.community.common.security;
 import java.io.IOException;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
@@ -23,15 +24,17 @@ public class LoginSuccessHandler extends  SimpleUrlAuthenticationSuccessHandler 
 			Authentication authentication) throws IOException, ServletException {
 		
 		    PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
-		    System.out.println("Authenticated user: " + userDetails.getUsername());
+		    
 		    
 		     // HttpSession 객체를 통해 세션 정보에 접근할 수 있습니다.
 		    HttpSession session = request.getSession();
 		    
 		    // 세션에 사용자 정보를 저장할 수 있습니다.
 		    session.setAttribute("userId", userDetails.getUsername());
-
-		    super.clearAuthenticationAttributes(request);
+		    
+		    // 사용자의 인증 상태를 저장 (인증된 경우 true, 그렇지 않은 경우 false)
+	        session.setAttribute("authenticated", true);
+		    
 
 		    RequestCache requestCache = new HttpSessionRequestCache();
 		    SavedRequest savedRequest = requestCache.getRequest(request, response);
@@ -44,9 +47,13 @@ public class LoginSuccessHandler extends  SimpleUrlAuthenticationSuccessHandler 
 		        }
 		        requestCache.removeRequest(request, response);
 		    }
-		    
+		   
+		      
 		    // 리다이렉션
 		    getRedirectStrategy().sendRedirect(request, response, redirectUrl);
+		   
+		    
+		    
 	    }
 
 	}

@@ -39,14 +39,13 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	
 	private UserDetailService userService;
 	
 	// 화원가입 페이지
 	@GetMapping("/register")
 	public String goRegister(Model model) {
 
-		return "pages/fo/registerMember";
+		return "pages/fo/register";
 	}
 
 	/*
@@ -60,8 +59,11 @@ public class MemberController {
 	
 	// 메인 페이지 
 	@GetMapping("/main")
-	public String goMain(Model model) {
-
+	public String goMain(Model model,HttpSession session) {
+		
+		// 세션에 저장된 사용자 아이디와 인증 상태를 Thymeleaf에 전달
+	    model.addAttribute("authenticated", session.getAttribute("authenticated"));
+	     
 		return "pages/fo/main";
 	}
 	
@@ -166,12 +168,13 @@ public class MemberController {
 	 //로그인 기능
 	@GetMapping("/login")
     public String login(@RequestParam(required = false) boolean hasMessage,
-			            @RequestParam(required = false) String message,
+    		            @RequestParam(required = false) String message,
 			            HttpServletRequest request,
 			            Model model) {
 		
 		model.addAttribute("hasMessage", hasMessage);
-   
+		
+		
 		return "pages/fo/login";
     }
 	

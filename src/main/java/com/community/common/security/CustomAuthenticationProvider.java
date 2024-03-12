@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	/*
-	 * -- 사용자가 입력한 아이디 비번의 정보와 DB에 저장된 사용자 정보를 비교해주는 인터페이스 
+	 * 사용자가 입력한 아이디 비번의 정보와 DB에 저장된 사용자 정보를 비교해주는 인터페이스 
 	 * 오버라이드되는 authenticate() 메서드는 화면에서 사용자가 입력한 로그인 정보를 담고 있는 Authentication 객체를 가지고 있다 
 	 * DB에서 사용자의 정보를 가져오는 건 UserDetailsService 인터페이스에서 loadUserByUsername() 메서드로 구현
 	 * 인터페이스는 인증에 성공하면 인증된 Authentication 객체를 생성하여 리턴하기 때문에 비밀번호, 계정 활성화, 잠금 모든 부분에서 확인이 되었다면 리턴
@@ -38,9 +38,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 	        String id = authentication.getName();
 	        String password = (String) authentication.getCredentials();
-	        
-	        System.out.println("회원입력" + password);
-
+	    
 	        try {
 	            UserDetails userDetails = userDetailService.loadUserByUsername(id);
 
