@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- Default Layout Import-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/page-full-width-layout}" layout:fragment="Content">
+<head>
+
+<title>테스트 페이지</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- inline CSS 영역-->
+<!--	    <style th:inline="css" type="text/css">-->
+<!--	        body {-->
+<!--	            margin: 30px;-->
+<!--	            border: 1px solid red;-->
+<!--	        }-->
+<!--	    </style>-->
+
+<!-- inline JS 영역-->
+<script th:inline="javascript" type="text/javascript">
+	        $(document).ready(() => {
+			
+	        });
+	        
+	    </script>
+	    
+	    <script th:inline="javascript" type="text/javascript">
+		function update(){
+			alert("수정성공");
+			opener.parent.location.reload();
+		}
+	        
+// 	    	function wincolse(){
+// 	    		window.colse();
+	    	
+	    		
+// 			}
+		
+	    </script>
+</head>
+<style>
+.layout {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+</style>
+<body>
+	
+			<div style="margin: 100px;">
+			<form method="post" th:action="@{/comment/{commentSq}(commentSq=${comment.commentSq})}">
+			<input type="hidden" name="boardSq"  th:value="${comment.boardSq}">
+			<input type="hidden" name="commentSq"  th:value="${comment.commentSq}">
+			<textarea name="contents"  th:value="${comment.contents}"></textarea>
+			<input type="hidden" name="selectionYn" th:value="${comment.selectionYn}">
+			<input type="hidden" name="majorKeyword" th:value="${comment.majorKeyword}">
+			<input type="hidden" name="useYn" th:value="${comment.useYn}">
+			<input type="hidden" name="delYn" th:value="${comment.delYn}">
+			<input type="hidden" name="modifyMbrSq" th:value="${comment.modifyMbrSq}">
+			<input type="hidden" name="mbrSq" th:value="${comment.mbrSq}">
+			<input type="hidden" name="modifyDate" th:value="${comment.modifyDate}">
+			<input type="hidden" name="registDate" th:value="${comment.registDate}">
+			
+			<button class="btn btn-danger" type="submit" th:onclick="update()">수정</button>
+			</form>
+			
+<!-- 				<button style="margin-top: 10px;" class="btn btn-info" type="submit" th:onclick="wincolse()">닫기</button> -->
+		</div>
+		
+		
+
+</body>
+</html>

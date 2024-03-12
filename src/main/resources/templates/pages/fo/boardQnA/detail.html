@@ -35,7 +35,7 @@
 	        				
 	        			     // data 배열을 순회하며 각 댓글 정보를 리스트에 추가
 	        		        data.forEach(function (comment) {
-	        		            const listItem = `<li>${comment.commentSq} ${comment.contents} ${comment.boardSq} <input class="btn btn-danger" type="button" onclick="deleteById(${comment.commentSq})" value="x"></li>`;
+	        		            const listItem = `<li>${comment.commentSq} ${comment.contents} ${comment.boardSq} <input class="btn btn-danger" type="button" onclick="deleteById(${comment.commentSq})" value="x"> <input class="btn btn-danger" type="button" onclick="updatecomment(${comment.commentSq})" value="수정"></li>`;
 	        		            commentUl.append(listItem);
 	        		        });
 
@@ -74,10 +74,22 @@
 		})
 	}
 	
+	const updatecomment = (commentSq) => {
+// 		console.log("버튼클릭");
+// 		alert("실행 commentSq="+commentSq);
+		console.log(commentSq);
+// 		alert("실행됨 ㅎㅇ ");
+		const commentSq1 = commentSq;
+		
+		
+			
+	var updUrl = "/comment/"+commentSq1;
+	window.open(updUrl,"댓글 수정 팝업","width=500, height=400, top=10, left=10");	
+	
+	}
 	
 	function submitComment() {
 	    const commentContent = $("#commentContent").val();
-	    const commentSq = $("#commentcommentSq").val();
 	    const commentboardSq = $("#commentboardSq").val();
 	    const commentmodifyMbrSq = $("#commentmodifyMbrSq").val();
 	    const commentmbrSq = $("#commentmbrSq").val();
@@ -118,7 +130,7 @@
 	            const commentUl = $("#message");
 	            commentUl.empty(); 
 	            data.forEach(function(comment) {
-	                const listItem = `<li>${comment.commentSq} ${comment.contents} ${comment.boardSq} <input class="btn btn-danger" type="button" onclick="deleteById(${comment.commentSq})" value="삭제"></li>`;
+	                const listItem = `<li>${comment.commentSq} ${comment.contents} ${comment.boardSq} <input class="btn btn-danger" type="button" onclick="deleteById(${comment.commentSq})" value="x"> <input class="btn btn-danger" type="button" onclick="updatecomment(${comment.commentSq})" value="수정"></li>`;
 	                commentUl.append(listItem);
 	            });
 	        },
@@ -139,6 +151,7 @@
 }
 </style>
 <body>
+
 
 		<div style="margin-top: 150px;" class="container">
 		<h1>Q&A 게시판</h1>
