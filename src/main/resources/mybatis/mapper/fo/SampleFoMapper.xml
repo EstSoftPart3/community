@@ -2,72 +2,27 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.community.fo.mybatis.mapper.SampleFoMapper">
-
-	<select id="empListAll" parameterType="com.community.fo.mybatis.vo.SampleVo" resultType="com.community.fo.mybatis.vo.SampleVo">
-	<!--직원 리스트-->
-		SELECT 
-			ST_NUM
-			,ST_NM
-			,ST_PO
-			,ST_DP
-			,ST_TEL
-			,ST_BIR
-			,St_ST		
-		FROM tb_eep_staff
-		ORDER BY ST_NUM ASC;
-		
-	</select>
-	
-	<select id="empSearchByName" parameterType="com.community.fo.mybatis.vo.SampleVo" resultType="com.community.fo.mybatis.vo.SampleVo">
-	<!--직원 이름으로 서치하기-->	
-				SELECT 
-					ST_NUM
-					,ST_NM
-					,ST_PO
-					,ST_DP
-					,ST_TEL
-					,ST_BIR
-					,St_ST		
-				FROM tb_eep_staff WHERE ST_NM = #{name}
-		
-	</select>
-	
-   <select id="viewDetail" parameterType="com.community.fo.mybatis.vo.SampleVo" resultType="com.community.fo.mybatis.vo.SampleVo">
-	<!--직원 이름으로 서치하기-->	
-				SELECT 
-					ST_NUM
-					,ST_NM
-					,ST_PO
-					,ST_DP
-					,ST_TEL
-					,ST_BIR
-					,St_ST		
-				FROM tb_eep_staff
-				WHERE ST_NUM = #{id}
-		
-	</select>
-	
-	<insert id="empInsert" parameterType="com.community.fo.mybatis.vo.SampleVo">
-		    INSERT INTO tb_eep_staff (ST_NUM,ST_NM,ST_PO,ST_DP,ST_TEL,ST_BIR,St_ST)	     
-			VALUES (#{ST_NUM},#{ST_NM},#{ST_PO},#{ST_DP},#{ST_TEL},#{ST_BIR},#{St_ST})
-		
+<mapper namespace="com.community.fo.mybatis.mapper.SampleMapper">
+	<insert id="insertSample"
+		parameterType="com.community.fo.mybatis.dto.SampleDTO">
+		INSERT INTO board_table (id,writer, title, contents)
+		VALUES (#{id},#{writer}, #{title}, #{contents})
 	</insert>
-	
-	<delete id="empDelete"  parameterType="string">
-        DELETE FROM tb_eep_staff WHERE ST_NUM = #{st_num};
-    </delete>
-    
-    <update id="empUpdate" parameterType="com.community.fo.mybatis.vo.SampleVo">
-		UPDATE tb_eep_staff
-		SET 
-			ST_NM = #{ST_NM},
-			ST_PO = #{ST_PO},
-			ST_DP = #{ST_DP},
-			ST_TEL = #{ST_TEL}, 
-			ST_BIR  = #{ST_BIR}, 
-			St_ST = #{St_ST}
-		WHERE ST_NUM = #{ST_NUM}
-		
+
+	<select id="selectAllSamples" resultType="com.community.fo.mybatis.vo.SampleVo">
+		SELECT id, writer, title, contents
+		FROM board_table
+		ORDER BY id DESC
+	</select>
+	<update id="updateSample" parameterType="com.community.fo.mybatis.dto.SampleDTO">
+		UPDATE board_table
+		SET title = #{title}, contents = #{contents}
+		WHERE id = #{id}
 	</update>
+	<delete id="deleteSample" parameterType="com.community.fo.mybatis.dto.SampleDTO">
+    	DELETE FROM board_table
+    	WHERE id = #{id}
+    	
+	</delete>
+
 </mapper>

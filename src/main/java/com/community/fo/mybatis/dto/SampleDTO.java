@@ -1,10 +1,12 @@
-package com.community.fo.mybatis.vo;
+package com.community.fo.mybatis.dto;
 
-import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-public class SampleVo {
+@Setter
+public class SampleDTO {
+	
 	private Long id;
 	private String writer;
 	private String title;
